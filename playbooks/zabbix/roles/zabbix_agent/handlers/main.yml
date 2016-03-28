@@ -1,0 +1,11 @@
+---
+ - name: copy zabbix_agent.conf
+   template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf
+
+ - name: restart zabbix-agentd on CentOS 7
+   shell: systemctl start zabbix-agent && systemctl enable zabbix-agent
+
+ - name: restart zabbix-agentd on CentOS 6
+   service: name=zabbix-agent state=restarted enabled=yes
+
+...
