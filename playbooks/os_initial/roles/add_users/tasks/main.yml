@@ -1,0 +1,6 @@
+---
+ - name: Add www groups
+   group: name={{ item }} gid={{  }} state=present system=yes
+   with_items: 
+    - php
+    - my

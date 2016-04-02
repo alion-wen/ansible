@@ -1,0 +1,5 @@
+---
+ - hosts: aliyun
+   roles:
+    - role: add_users
+...
