@@ -1,0 +1,16 @@
+---
+ - name: Modify /etc/security/limits.conf
+   shell: echo {{ item }} >> /etc/security/limits.conf
+   with_items:
+    - "* soft nproc 102400"
+    - "* hard nproc 102400"
+    - "* soft nofile 102400"
+    - "* hard nofile 102400"
+
+ - name: Modify /etc/systemd/system.conf
+   shell: echo {{ item }} >> /etc/systemd/system.conf
+   when: ansible_distribution_major_version  == "7"
+   with_items:
+    - "DefaultLimitNOFILE=102400"
+    - "DefaultLimitNPROC=102400"
+...

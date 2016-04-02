@@ -3,5 +3,8 @@
    roles:
    # - role: add_users
    # - role: install_base_soft
-    - role: set_time
+   # - role: set_time
+   # - role: set_limits
+   # - role: set_sysctl
+    - role: set_repo
 ...

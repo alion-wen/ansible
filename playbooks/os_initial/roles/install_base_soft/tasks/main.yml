@@ -17,6 +17,7 @@
     - irqbalance
     - microcode_ctl
     - smartmontools
+    - tcl
 
  - name: Install Tools Software
    yum: name={{ item }} state=present
@@ -46,6 +47,7 @@
    with_items: 
     - python-pip
     - python-simplejson
+    - python-httplib2
 
  - name: Install Python Software
    yum: name={{ item }} state=present
