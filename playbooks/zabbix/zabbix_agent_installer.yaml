@@ -8,12 +8,13 @@
       yum: name=unixODBC state=present
     - name: install zabbix-agentd on CentOS 7      
       yum: name=http://mirrors.aliyun.com/zabbix/zabbix/3.0/rhel/7/x86_64/zabbix-agent-3.0.1-1.el7.x86_64.rpm state=present
-      template: 
+#      template: 
       when: "ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'"
       notify:
        - restart zabbix-agentd on CentOS 7
     - name: install zabbix-agentd on CentOS 6
       yum: name=http://mirrors.aliyun.com/zabbix/zabbix/3.0/rhel/6/x86_64/zabbix-agent-3.0.1-1.el6.x86_64.rpm state=present
+#      template: 
       when: "ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'"
       notify:
        - restart zabbix-agentd on CentOS 6
