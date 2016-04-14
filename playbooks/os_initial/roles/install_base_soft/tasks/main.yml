@@ -1,0 +1,59 @@
+---
+ - name: Install Basic Software
+   yum: name={{ item }} state=present
+   with_items: 
+    - ntp 
+    - vim-enhanced
+    - sysstat
+    - gcc
+    - gcc-c++
+    - make
+    - automake
+    - autoconf
+    - glibc
+    - glibc-devel
+    - glib2
+    - glib2-devel
+    - irqbalance
+    - microcode_ctl
+    - smartmontools
+
+ - name: Install Tools Software
+   yum: name={{ item }} state=present
+   with_items: 
+    - net-tools
+    - rsync
+    - subversion
+    - screen
+    - strace
+    - numactl
+    - psmisc
+    - lsof
+    - lrzsz
+    - wget
+
+ - name: Install Monitor Software
+   yum: name={{ item }} state=present
+   with_items: 
+    - iptraf
+    - nload
+    - iftop
+    - iotop
+    - dstat
+
+ - name: Install Python Software
+   yum: name={{ item }} state=present
+   with_items: 
+    - python-pip
+    - python-simplejson
+
+ - name: Install Python Software
+   yum: name={{ item }} state=present
+   with_items:
+    - perl-DBI 
+    - perl-DBD-MySQL
+    - perl-Config-Tiny
+    - perl-ExtUtils-MakeMaker
+    - perl-CPAN
+    - perl-App-cpanminus
+...

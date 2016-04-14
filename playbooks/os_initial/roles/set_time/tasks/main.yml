@@ -1,0 +1,10 @@
+---
+ - name: Set Timezone
+   shell: timedatectl set-timezone Asia/Shanghai
+
+ - name: Sync Datetime
+   shell: /usr/sbin/ntpdate ntp.api.bz && /usr/sbin/hwclock -w
+
+ - name: Sync Datetime Crontab
+   cron: name="Sync Datetime" state=present  hour=2 minute=15  user=root job="/usr/sbin/ntpdate ntp.api.bz > /dev/null 2>&1;/usr/sbin/hwclock -w > /dev/null 2>&1"
+...

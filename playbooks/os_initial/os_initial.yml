@@ -1,5 +1,7 @@
 ---
- - hosts: aliyun
+ - hosts: all
    roles:
-    - role: add_users
+   # - role: add_users
+   # - role: install_base_soft
+    - role: set_time
 ...
