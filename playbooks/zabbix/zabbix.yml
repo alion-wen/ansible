@@ -1,5 +1,5 @@
 ---
- - hosts: zabbix_all
+ - hosts: all
    roles:
     - role: common
  - hosts: zabbix_agent

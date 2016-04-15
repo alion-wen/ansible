@@ -1,4 +1,0 @@
-[zabbix_all:children]
-zabbix_agent
-[zabbix_agent]
-120.27.129.14
