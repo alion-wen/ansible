@@ -1,0 +1,29 @@
+---
+ - name: Close Selinux
+   selinux: 
+    state: disabled
+
+ - name: Close Firewall On Centos 6
+   service: 
+    name: iptables
+    state: stopped
+    enabled: no
+   when: ansible_distribution_major_version == "6"
+
+ - name: Close Firewall On Centos 7
+   shell: systemctl disable firewalld && systemctl stop firewalld
+   when: ansible_distribution_major_version == "7"
+
+ - name: Chmod /etc/rc.d/rc.local
+   file: 
+    path: /etc/rc.d/rc.local
+    mode: "u+x"
+
+ - name: Update Kernel
+   yum:
+    name: "*"
+    state: latest 
+
+ - name: Reboot System
+   command: init 6
+

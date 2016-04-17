@@ -1,6 +1,8 @@
 ---
  - name: Install Basic Software
-   yum: name={{ item }} state=present
+   yum: 
+    name: "{{ item }}"
+    state: present
    with_items: 
     - ntp 
     - vim-enhanced
@@ -20,7 +22,9 @@
     - tcl
 
  - name: Install Tools Software
-   yum: name={{ item }} state=present
+   yum: 
+    name: "{{ item }}"
+    state: present
    with_items: 
     - net-tools
     - rsync
@@ -34,7 +38,9 @@
     - wget
 
  - name: Install Monitor Software
-   yum: name={{ item }} state=present
+   yum: 
+    name: "{{ item }}" 
+    state: present
    with_items: 
     - iptraf
     - nload
@@ -43,14 +49,18 @@
     - dstat
 
  - name: Install Python Software
-   yum: name={{ item }} state=present
+   yum: 
+    name: "{{ item }}"
+    state: present
    with_items: 
     - python-pip
     - python-simplejson
     - python-httplib2
 
  - name: Install Python Software
-   yum: name={{ item }} state=present
+   yum: 
+    name: "{{ item }}" 
+    state: present
    with_items:
     - perl-DBI 
     - perl-DBD-MySQL

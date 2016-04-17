@@ -1,9 +1,14 @@
 ---
  - name: copy docker.repo
-   copy: src=docker.repo dest=/etc/yum.repos.d/docker.repo
+   copy: 
+    src: docker.repo 
+    dest: /etc/yum.repos.d/docker.repo
 
  - name: yum install docker-engine 
-   yum: name=docker-engine state=present update_cache=yes
+   yum: 
+    name: docker-engine 
+    state: present 
+    update_cache: yes
    notify: 
     - restart docker-engine
 ...

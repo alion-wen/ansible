@@ -1,10 +1,14 @@
 ---
  - name: Modify /etc/NetworkManager/NetworkManager.conf
-   shell:  sed -i "/\[main\]/adns=none"  /etc/NetworkManager/NetworkManager.conf
+   copy: 
+    src: NetworkManager.conf 
+    dest: /etc/NetworkManager/NetworkManager.conf
    when: ansible_distribution_major_version == '7'
    notify:
     - Restart NetworkManager
 
  - name: Add Nameserver
-   template: src=resolv.conf.j2 dest=/etc/resolv.conf
+   template: 
+    src: resolv.conf.j2 
+    dest: /etc/resolv.conf
 ...
