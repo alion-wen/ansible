@@ -9,6 +9,17 @@
     dest: /etc/localtime
    when: ansible_distribution_major_version != '7'
 
+ - name: Close Ntpd Service On CentOS 7
+   shell: systemctl stop ntpd && systemctl disable ntpd
+   when: ansible_distribution_major_version == '7'
+
+ - name: Close Ntpd Service On CentOS 6
+   service:
+    name: ntpd
+    state: stopped
+    enabled: no
+   when: ansible_distribution_major_version != '7'
+
  - name: Sync Datetime
    shell: /usr/sbin/ntpdate ntp.api.bz && /usr/sbin/hwclock -w
 

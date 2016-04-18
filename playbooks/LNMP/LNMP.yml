@@ -1,0 +1,7 @@
+---
+ - hosts:
+   roles:
+    - nginx
+    - php
+    - mysql
+...
