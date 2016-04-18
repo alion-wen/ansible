@@ -16,4 +16,8 @@
 
  - name: Get Nginx Source Code
    uri:
-    url: http://download.zhangshangduobao.net/Packages/nginx/ 
+    url: http://download.zhangshangduobao.net/Packages/nginx/nginx-{{ Nversion }}.tar.gz
+    dest: /tmp/
+    creates:
+
+ - name: 
