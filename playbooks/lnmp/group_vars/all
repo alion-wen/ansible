@@ -18,6 +18,8 @@ php_conf_url: "https://github.com/chenjianbin/php_conf.git"
 
 #mysql
 mysql_package: percona-server-5.6.29-76.2
-mysql_package_url: "http://storage.ops.zhangshangduobao.net/Packages/nginx/{{ mysql_package }}.tar.gz"
+mysql_package_url: "http://storage.ops.zhangshangduobao.net/Packages/mysql/{{ mysql_package }}.tar.gz"
 mysql_user: mysql
+mysql_port: 3306
 mysql_install_dir: /usr/local/webserver/mysql
+mysql_datadir: /data0/mysql

@@ -26,32 +26,54 @@
        dest: "{{ build_dir }}"
        copy: no
        creates: "{{ build_dir }}/{{ mysql_package }}"
-    - shell: cd "{{ build_dir }}/{{ mysql_package }}" && 
-    - shell: cd "{{ build_dir }}/{{ nginx_package }}" && make && make install
+    - shell: cd "{{ build_dir }}/{{ mysql_package }}" && cmake ./ \
+        -DCMAKE_INSTALL_PREFIX=/usr/local/webserver/mysql \
+        -DWITH_PARTITION_STORAGE_ENGINE=1 \
+        -DWITH_INNOBASE_STORAGE_ENGINE=1 \
+        -DWITH_ARCHIVE_STORAGE_ENGINE=1 \
+        -DWITH_BLACKHOLE_STORAGE_ENGINE=1 \
+        -DWITH_CSV_STORAGE_ENGINE=1 \
+        -DWITH_HEAP_STORAGE_ENGINE=1 \
+        -DWITH_MYISAM_STORAGE_ENGINE=1 \
+        -DWITH_MYISAMMRG_STORAGE_ENGINE=1 \
+        -DWITH_ZLIB=bundled \
+        -DENABLED_LOCAL_INFILE=1 \
+        -DDEFAULT_CHARSET=utf8 \
+        -DDEFAULT_COLLATION=utf8_general_ci \
+        -DEXTRA_CHARSETS=gbk,gb2312,utf8,ascii \
+        -DWITH_DEBUG=0 \
+        -DWITH_EMBEDDED_SERVER=1 \
+        -DWITH_FAST_MUTEXES=1 \
+        -DWITH_EDITLINE=bundled 
+    - shell: cd "{{ build_dir }}/{{ mysql_package }}" && make && make install
  
  - block:
     - debug:
-       msg: Git Nginx Conf
-    - file: 
-       path: "{{ nginx_install_dir }}/conf"
-       state: absent
-    - git: 
-       repo: "{{ nginx_conf_url }}"
-       dest: "{{ nginx_install_dir }}/conf"
-       clone: yes
+       msg: Generate Mysql Data Directory
+    - file:
+       path: "{{ mysql_datadir }}/{{ mysql_port }}/{{ item }}"
+       state: directory
+       owner: "{{ mysql_user }}"
+       group: "{{ mysql_user }}"
+      with_items:
+       - data
+       - logs/binlog
+       - logs/relaylog
+    - template:
+       src: "{{ item.name }}.j2"
+       dest: "{{ mysql_datadir }}/{{ mysql_port }}/{{ item.name }}"
+       owner: "{{ mysql_user }}"
+       group: "{{ mysql_user }}"
+       mode: "{{ item.mode }}"
+      with_items:
+       - {name: my.cnf, mode: 600}
+       - {name: mysqld, mode: 700}
+    - shell: "{{ mysql_install_dir }}/scripts/mysql_install_db --defaults-file={{ mysql_datadir }}/{{ mysql_port }}/my.cnf --basedir={{ mysql_install_dir }}"
 
  - name: Start Daemon When System Boot
-   shell: echo "{{ nginx_install_dir }}/sbin/nginx" >> /etc/rc.local
+   shell: echo "{{ mysql_datadir }}/{{ mysql_port }}/mysqld start" >> /etc/rc.local
 
- - name: Create Logs Dir
-   file:
-    path: "{{ nginx_logs_dir }}" 
-    owner: "{{ nginx_user }}"
-    group: "{{ nginx_user }}"
-    state: directory
+ - name: Ldconfig Mysql Libs
+   shell: echo "{{ mysql_install_dir }}/lib" >> /etc/ld.so.conf.d/mysql.conf && ldconfig
 
- - name: Set Regular Clean Nginx Logs
-   template: 
-    src: nginx.logrotate
-    dest: /etc/logrotate.d/nginx
 ...
