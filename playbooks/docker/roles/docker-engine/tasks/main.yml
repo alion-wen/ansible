@@ -4,6 +4,23 @@
     src: docker.repo 
     dest: /etc/yum.repos.d/docker.repo
 
+ - block:
+    - debug:
+       msg: Add SSL Certificate
+    - copy:
+       src: "{{ item.src }}"
+       dest: "{{ item.dest}}"
+      with_items:
+       - {src: cacert.pem, dest: /etc/pki/ca-trust/source/anchors/}
+       - {src: nginx.crt, dest: /etc/pki/ca-trust/source/anchors/}
+    - file:
+       path: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+       mode: 0644
+    - shell: cat /tmp/cacert.pem >> /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem #&& update-ca-trust extract
+    - file:
+       path: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+       mode: 0444
+
  - name: yum install docker-engine 
    yum: 
     name: docker-engine 
