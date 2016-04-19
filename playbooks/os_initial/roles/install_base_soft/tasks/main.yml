@@ -36,6 +36,7 @@
     - lsof
     - lrzsz
     - wget
+    - bzip2
 
  - name: Install Monitor Software
    yum: 
