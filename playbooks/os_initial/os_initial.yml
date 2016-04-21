@@ -5,13 +5,12 @@
 
  - hosts: all
    roles:
-    #- role: add_users
-    #- role: set_limits
-    #- role: set_sysctl
-    #- role: set_time
-    #- role: set_sshd
+    - role: set_sshd
+    - role: add_users
+    - role: set_limits
+    - role: set_sysctl
+    - role: set_time
     - role: set_repo
-    #- role: install_base_soft
-    #- role: set_others
-   
+    - role: install_base_soft
+    - role: set_others
 ...

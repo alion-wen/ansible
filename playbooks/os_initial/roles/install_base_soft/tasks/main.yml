@@ -29,6 +29,7 @@
     - net-tools
     - rsync
     - subversion
+    - git
     - screen
     - strace
     - numactl
@@ -37,6 +38,7 @@
     - lrzsz
     - wget
     - bzip2
+    - httpd-tools
 
  - name: Install Monitor Software
    yum: 

@@ -44,9 +44,8 @@
 # overwritten by settings in the MySQL configuration files.
 
 basedir={{ mysql_install_dir }}
-instancedir={{ mysql_datadir }}/{{ mysql_port }}
-datadir=$instancedir/data
-defaults_file=$instancedir/my.cnf
+datadir={{ mysql_datadir }}/{{ mysql_port }}/data
+defaults_file={{ mysql_datadir }}/{{ mysql_port }}/my.cnf
 
 # Default value, in seconds, afterwhich the script should timeout waiting
 # for server start. 
@@ -69,7 +68,7 @@ then
   bindir=/opt/mysql/bin
   if test -z "$datadir"
   then
-    datadir=/opt/mysql/data
+    datadir=/data0/mysql/3306
   fi
   sbindir=/opt/mysql/bin
   libexecdir=/opt/mysql/bin
@@ -213,7 +212,7 @@ then
   print_defaults="$bindir/mysql_print_defaults"
 else
   # Try to find basedir in /etc/my.cnf
-  conf=$defaults_file
+  conf=/etc/my.cnf
   print_defaults=
   if test -r $conf
   then
@@ -255,16 +254,14 @@ else
   fi
 fi
 
-#注释了,这个参数会影响后面的启动参数
-#parse_server_arguments `$print_defaults $extra_args mysqld server mysql_server mysql.server`
+parse_server_arguments `$print_defaults $extra_args mysqld server mysql_server mysql.server`
 
 #
 # Set pid file if not given
 #
 if test -z "$mysqld_pid_file_path"
 then
-#修改了mysqld_pid_file_path赋值，将pid保存到指定目录
-  mysqld_pid_file_path=$instancedir/mysql.pid
+  mysqld_pid_file_path=$datadir/`hostname`.pid
 else
   case "$mysqld_pid_file_path" in
     /* ) ;;
