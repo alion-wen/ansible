@@ -60,6 +60,7 @@
     - python-simplejson
     - python-httplib2
     - python34
+    - python34-devel
 
  - name: Install Python Software
    yum: 
