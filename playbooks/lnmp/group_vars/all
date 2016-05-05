@@ -1,9 +1,10 @@
 ---
 build_dir: /tmp
+package_url_prefix: "http://storage.ops.zhangshangduobao.net/Packages"
 
 #nginx
 nginx_package: nginx-1.8.1
-nginx_package_url: "http://storage.ops.zhangshangduobao.net/Packages/nginx/{{ nginx_package }}.tar.gz"
+nginx_package_url: "{{ package_url_prefix }}/nginx/{{ nginx_package }}.tar.gz"
 nginx_user: www
 nginx_install_dir: /usr/local/webserver/nginx
 nginx_logs_dir: /data0/logs/nginx
@@ -11,7 +12,7 @@ nginx_conf_url: "https://github.com/chenjianbin/nginx_conf.git"
 
 #php
 php_package: php-5.6.20
-php_package_url: "http://storage.ops.zhangshangduobao.net/Packages/php/{{ php_package }}.tar.bz2"
+php_package_url: "{{ package_url_prefix }}/php/{{ php_package }}.tar.bz2"
 php_user: www
 php_install_dir: /usr/local/webserver/php
 php_logs_dir: /data0/logs/php-fpm
@@ -19,7 +20,8 @@ php_conf_url: "https://github.com/chenjianbin/php_conf.git"
 
 #mysql
 mysql_package: percona-server-5.6.29-76.2
-mysql_package_url: "http://storage.ops.zhangshangduobao.net/Packages/mysql/{{ mysql_package }}.tar.gz"
+mysql_package_url: "{{ package_url_prefix }}/mysql/{{ mysql_package }}.tar.gz"
+tools_package_url: ["{{ package_url_prefix }}/mysql/percona-toolkit-2.2.17-1.noarch.rpm", "{{ package_url_prefix }}/mysql/percona-xtrabackup-24-2.4.2-1.el7.x86_64.rpm"]
 mysql_user: mysql
 mysql_port: 3306
 mysql_install_dir: /usr/local/webserver/mysql

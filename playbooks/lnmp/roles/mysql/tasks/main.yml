@@ -70,6 +70,12 @@
        - {name: mysqld, mode: 700}
     - shell: "{{ mysql_install_dir }}/scripts/mysql_install_db --defaults-file={{ mysql_datadir }}/{{ mysql_port }}/my.cnf --basedir={{ mysql_install_dir }}"
 
+ - name: Install Mysql Tools
+   yum:
+    name: "{{ item }}"
+    state: present
+   with_items: "{{ tools_package_url }}"
+
  - name: Start Daemon When System Boot
    shell: echo "{{ mysql_datadir }}/{{ mysql_port }}/mysqld start" >> /etc/rc.local
 

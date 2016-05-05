@@ -17,5 +17,5 @@
     shell: /sbin/nologin 
     state: present 
     system: yes
-   with_dict: "{{os_users}}"
+   with_dict: "{{ os_users }}"
 ...
