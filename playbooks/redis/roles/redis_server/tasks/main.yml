@@ -28,11 +28,17 @@
        msg: Generate Redis Instance Dir
     - command: ls -d /data0/scripts
       register: result
+      ignore_errors: True
     - git: 
        repo: "{{ scripts_url }}"
        dest: "{{ scripts_dir }}"
        clone: yes
       when: result.rc == 2
+    - git: 
+       repo: "{{ scripts_url }}"
+       dest: "{{ scripts_dir }}"
+       update: yes
+      when: result.rc == 0
     - command: /bin/bash "{{ scripts_dir }}/redis/redis_gen.sh" "{{ redis_port }}"
       notify:
        - Restart Redis
