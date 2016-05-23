@@ -26,4 +26,5 @@
 
  - name: Reboot System
    command: init 6
+   ignore_errors: True
 
