@@ -1,5 +1,5 @@
 ---
- - name: copy docker.repo
+ - name: Copy Docker.repo
    copy: 
     src: docker.repo 
     dest: /etc/yum.repos.d/docker.repo
@@ -22,11 +22,11 @@
     #   path: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
     #   mode: 0444
 
- - name: yum install docker-engine 
+ - name: Yum Install Docker-engine 
    yum: 
     name: docker-engine 
     state: present 
     update_cache: yes
    notify: 
-    - restart docker-engine
+    - Restart Docker-engine
 ...
