@@ -46,6 +46,7 @@
         -DWITH_FAST_MUTEXES=1 \
         -DWITH_EDITLINE=bundled 
     - shell: cd "{{ build_dir }}/{{ mysql_package }}" && make && make install
+   tags: [Build]
  
  - block:
     - debug:
@@ -83,6 +84,6 @@
    shell: echo "{{ mysql_install_dir }}/lib" >> /etc/ld.so.conf.d/mysql.conf && ldconfig
 
  - name: Export PATH
-   shell: echo "export PATH={{ mysql_install_dir }}/bin:$PATH" >> /etc/.bash_profile
+   shell: echo "export PATH={{ mysql_install_dir }}/bin:$PATH" >> /root/.bash_profile
 
 ...
