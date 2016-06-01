@@ -4,6 +4,12 @@
     src: docker.repo 
     dest: /etc/yum.repos.d/docker.repo
 
+ - name: Yum Install Docker-engine 
+   yum: 
+    name: docker-engine 
+    state: present 
+    update_cache: yes
+
  - block:
     - debug:
        msg: Add SSL Certificate
@@ -18,15 +24,10 @@
     #   mode: 0644
     - shell: update-ca-trust extract
     - shell: cat /etc/pki/ca-trust/source/anchors/cacert.pem >> /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem 
+      notify: 
+       - Restart Docker-engine
     #- file:
     #   path: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
     #   mode: 0444
 
- - name: Yum Install Docker-engine 
-   yum: 
-    name: docker-engine 
-    state: present 
-    update_cache: yes
-   notify: 
-    - Restart Docker-engine
 ...
