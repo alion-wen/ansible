@@ -20,6 +20,7 @@
     - microcode_ctl
     - smartmontools
     - tcl
+    - libffi-devel
 
  - name: Install Tools Software
    yum: 
@@ -31,16 +32,14 @@
     - subversion
     - git
     - screen
-    - strace
     - numactl
     - psmisc
-    - lsof
     - lrzsz
     - wget
     - bzip2
     - httpd-tools
 
- - name: Install Monitor Software
+ - name: Install Debug Software
    yum: 
     name: "{{ item }}" 
     state: present
@@ -50,6 +49,8 @@
     - iftop
     - iotop
     - dstat
+    - strace
+    - lsof
 
  - name: Install Python Software
    yum: 
