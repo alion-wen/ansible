@@ -38,6 +38,7 @@
     - wget
     - bzip2
     - httpd-tools
+    - tree
 
  - name: Install Debug Software
    yum: 
