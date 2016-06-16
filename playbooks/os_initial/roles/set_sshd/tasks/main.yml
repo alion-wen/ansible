@@ -4,16 +4,12 @@
     src: sshd_config 
     dest: /etc/ssh/sshd_config
    when: ansible_distribution_major_version == '7'
-   notify:
-    - Restart Sshd On CentOS 7
 
  - name: Modify /etc/ssh/sshd_config On CentOS 6
    copy: 
     src: sshd_config 
     dest: /etc/ssh/sshd_config
    when: ansible_distribution_major_version == '6'
-   notify:
-    - Restart Sshd On CentOS 6
 
  - name: Add Authorized_keys
    authorized_key: 
