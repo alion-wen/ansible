@@ -68,5 +68,5 @@
     dest: /etc/logrotate.d/nginx
 
  - name: Export PATH
-   shell: echo "export PATH={{ nginx_install_dir }}/bin:$PATH" >> /root/.bash_profile
+   shell: echo "export PATH={{ nginx_install_dir }}/bin:\$PATH" >> /root/.bash_profile
 ...
