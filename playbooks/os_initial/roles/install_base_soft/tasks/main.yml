@@ -64,7 +64,7 @@
     - python34
     - python34-devel
 
- - name: Install Python Software
+ - name: Install Perl Software
    yum: 
     name: "{{ item }}" 
     state: present
