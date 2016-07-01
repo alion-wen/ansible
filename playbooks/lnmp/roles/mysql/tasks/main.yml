@@ -40,6 +40,6 @@
    shell: echo "{{ mysql_install_dir }}/lib" >> /etc/ld.so.conf.d/mysql.conf && ldconfig
 
  - name: Export PATH
-   shell: echo "export PATH={{ mysql_install_dir }}/bin:$PATH" >> /root/.bash_profile
+   shell: echo "export PATH={{ mysql_install_dir }}/bin:\$PATH" >> /root/.bash_profile
 
 ...

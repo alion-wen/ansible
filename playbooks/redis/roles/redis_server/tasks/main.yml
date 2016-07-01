@@ -47,5 +47,5 @@
    shell: echo "{{ redis_instance_dir }}/{{ redis_port }}/redisd start" >> /etc/rc.local
 
  - name: Export PATH
-   shell: echo "export PATH={{ redis_install_dir }}/bin:$PATH" >> /root/.bash_profile
+   shell: echo "export PATH={{ redis_install_dir }}/bin:\$PATH" >> /root/.bash_profile
 ...
