@@ -1,1 +1,2 @@
-Zabbix_Server_IP: 121.40.217.101
+Zabbix_Server_IP: "miguanvpn.f3322.net"
+Mode: "active"
