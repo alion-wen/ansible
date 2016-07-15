@@ -1,8 +1,8 @@
 ---
- - name: restart zabbix-agentd on CentOS 7
+ - name: Restart Zabbix-agentd On CentOS 7
    shell: systemctl start zabbix-agent && systemctl enable zabbix-agent
 
- - name: restart zabbix-agentd on CentOS 6
+ - name: Restart Zabbix-agentd On CentOS 6
    service: 
     name: zabbix-agent 
     state: restarted 

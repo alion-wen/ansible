@@ -1,22 +1,28 @@
 ---
- - name: install zabbix-agentd on CentOS 7
+ - name: Install Zabbix-agentd On CentOS 7
    yum: 
-    name: http://mirrors.aliyun.com/zabbix/zabbix/3.0/rhel/7/x86_64/zabbix-agent-3.0.1-1.el7.x86_64.rpm 
+    name: "{{ Zabbix_Agent_Package }}"
     state: present
    when: "ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'"
    notify:
-    - restart zabbix-agentd on CentOS 7
+    - Restart Zabbix-agentd On CentOS 7
 
- - name: install zabbix-agentd on CentOS 6
+ - name: Install Zabbix-agentd On CentOS 6
    yum: 
-    name: http://mirrors.aliyun.com/zabbix/zabbix/3.0/rhel/6/x86_64/zabbix-agent-3.0.1-1.el6.x86_64.rpm 
+    name: "{{ Zabbix_Agent_Package }}"
     state: present
    when: "ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'"
    notify:
-    - restart zabbix-agentd on CentOS 6
+    - Restart Zabbix-agentd On CentOS 6
 
- - name: copy zabbix_agent.conf
+ - name: Copy Zabbix_agent.conf
    template: 
     src: zabbix_agentd.conf.{{ Mode }}.j2 
     dest: /etc/zabbix/zabbix_agentd.conf
+
+ - name: Copy Zabbix_agentd.d Directory
+   copy:
+    src: zabbix_agentd.d
+    dest: /etc/zabbix
+    directory_mode: directories
 ...
