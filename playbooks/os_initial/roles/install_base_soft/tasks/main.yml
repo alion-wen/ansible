@@ -52,6 +52,7 @@
     - dstat
     - strace
     - lsof
+    - tcpdump
 
  - name: Install Python Software
    yum: 
