@@ -7,10 +7,10 @@
  - hosts: all
    roles:
     - role: set_sshd
-    - role: add_users
-    - role: set_limits
-    - role: set_time
     - role: set_repo
     - role: install_base_soft
+    - role: set_time
+    - role: add_users
+    - role: set_limits
     - role: set_others
 ...
