@@ -1,0 +1,13 @@
+---
+ - hosts: logstash
+   roles:
+    - role: logstash
+
+ - hosts: elasticsearch
+   roles:
+    - role: elasticsearch
+
+ - hosts: kibana
+   roles:
+    - role: kibana
+...

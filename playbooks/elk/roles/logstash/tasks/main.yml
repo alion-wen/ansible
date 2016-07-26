@@ -1,0 +1,25 @@
+---
+ - name: Install Logstash
+   yum: 
+    name: "{{ logstash_package_url }}"
+    state: present
+
+
+ - name: Copy Zabbix_agent.conf
+   template: 
+    src: zabbix_agentd.conf.{{ Mode }}.j2 
+    dest: /etc/zabbix/zabbix_agentd.conf
+
+ - name: Delete Old Zabbix_agentd.d Directory
+   file:
+    path: /etc/zabbix/zabbix_agentd.d
+    state: absent
+
+ - name: Checkout Zabbix_agentd.d
+   subversion:
+    repo: "{{ SVN_ADDR }}"
+    username: "{{ SVN_USER }}"
+    password: "{{ SVN_PASSWD }}"
+    dest: /etc/zabbix/zabbix_agentd.d
+    force: yes
+...

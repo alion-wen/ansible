@@ -21,6 +21,7 @@
     - smartmontools
     - tcl
     - libffi-devel
+    - deltarpm
 
  - name: Install Tools Software
    yum: 
