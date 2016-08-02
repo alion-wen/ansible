@@ -1,4 +1,9 @@
 ---
+ - name: Install Dependent Packages
+   yum:
+    name: "java-1.8.0"
+    state: present
+
  - name: Install Logstash
    yum: 
     name: "{{ logstash_package_url }}"
