@@ -1,4 +1,8 @@
 ---
+ - hosts: all
+   roles:
+    - role: common
+
  - hosts: logstash
    roles:
     - role: logstash

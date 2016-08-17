@@ -1,30 +1,23 @@
 ---
- - name: Install Dependent Packages
-   yum:
-    name: "java-1.8.0"
-    state: present
+ - name: Download Logstash Package
+   uri: 
+    url: "{{ logstash_package_url }}"
+    dest: "{{ tempdir }}"
+    creates: "{{ tempdir }}/{{ logstash_package_fullname }}"
 
- - name: Install Logstash
-   yum: 
-    name: "{{ logstash_package_url }}"
-    state: present
+ - block:
+    - debug:
+       msg: "Install Logstash"
+    - unarchive:
+       src: "{{ tempdir }}/{{ logstash_package_fullname }}" 
+       dest: "{{ tempdir }}"
+       copy: no
+       creates: "{{ tempdir }}/{{ logstash_package_name }}"
+#    - command: "rsync -avP {{ tempdir }}/{{ logstash_package_name }} {{logstash_basedir}}"
+    - synchronize:
+       src: "{{ tempdir }}/{{ logstash_package_name }}/"
+       dest: "{{logstash_basedir}}"
+      delegate_to: "{{ inventory_hostname }}"
 
 
- - name: Copy Zabbix_agent.conf
-   template: 
-    src: zabbix_agentd.conf.{{ Mode }}.j2 
-    dest: /etc/zabbix/zabbix_agentd.conf
-
- - name: Delete Old Zabbix_agentd.d Directory
-   file:
-    path: /etc/zabbix/zabbix_agentd.d
-    state: absent
-
- - name: Checkout Zabbix_agentd.d
-   subversion:
-    repo: "{{ SVN_ADDR }}"
-    username: "{{ SVN_USER }}"
-    password: "{{ SVN_PASSWD }}"
-    dest: /etc/zabbix/zabbix_agentd.d
-    force: yes
 ...

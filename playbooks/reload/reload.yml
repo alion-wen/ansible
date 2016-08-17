@@ -1,0 +1,10 @@
+---
+ - hosts: nginx
+   roles:
+    - nginx
+    #- php
+    #- mysql
+    #- zabbix_agent
+    #- zabbix_server
+    #- logstash
+...
