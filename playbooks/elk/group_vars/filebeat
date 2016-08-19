@@ -1,0 +1,2 @@
+---
+filebeat_rpm: "https://download.elastic.co/beats/filebeat/filebeat-1.2.3-x86_64.rpm"

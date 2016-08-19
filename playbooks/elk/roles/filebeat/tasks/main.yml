@@ -1,0 +1,16 @@
+---
+ - name: Install Filebeat
+   yum: 
+    name: "{{ filebeat_rpm }}"
+    state: present
+
+ - name: Copy Templates
+   template:
+    dest: "/etc/filebeat/filebeat.yml"
+    src: "filebeat.yml.j2"
+   notify:
+    - Restart Filebeat
+
+ - name: Setup Auto Start When System Boot
+   command: "systemctl enable filebeat"
+...

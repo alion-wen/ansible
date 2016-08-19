@@ -1,0 +1,25 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /data0/logs/nginx/*.access.log
+      input_type: log
+      ignore_older: 24h
+      close_older: 1h
+      scan_frequency: 10s
+      backoff: 1s
+      max_backoff: 10s
+      backoff_factor: 2
+  spool_size: 2048
+  idle_timeout: 5s
+  registry_file: /var/lib/filebeat/.filebeat
+output:
+  redis:
+    host: "{{ redis_host }}"
+    port: {{ redis_port }}
+    password: "{{ redis_passwd }}"
+    db: 0
+    index: filebeat
+    timeout: 5
+    reconnect_interval: 1
+    

@@ -13,11 +13,30 @@
        dest: "{{ tempdir }}"
        copy: no
        creates: "{{ tempdir }}/{{ logstash_package_name }}"
-#    - command: "rsync -avP {{ tempdir }}/{{ logstash_package_name }} {{logstash_basedir}}"
     - synchronize:
        src: "{{ tempdir }}/{{ logstash_package_name }}/"
-       dest: "{{logstash_basedir}}"
+       dest: "{{ logstash_basedir }}"
       delegate_to: "{{ inventory_hostname }}"
+    - file:
+       path: "{{ logstash_basedir }}/{{ item }}"
+       state: directory
+      with_items:
+       - "sincedb"
+       - "patterns"
+       - "conf"
+       - "logs"
+    - template:
+       src: "{{ item }}.j2"
+       dest: "{{ logstash_basedir }}/{{ item }}"
+      with_items:
+       - "conf/redis.conf"
+    - synchronize:
+       src: "patterns/"
+       dest: "{{ logstash_basedir }}/patterns"
+
+ - name: Setup Logstash Auto Start
+   shell: echo "{{ logstash_basedir }}/bin/logstash -rf {{ logstash_basedir }}/conf/nginx.conf -l {{ logstash_basedir }}/logs/logstash.log &" >> /etc/rc.local 
+       
 
 
 ...

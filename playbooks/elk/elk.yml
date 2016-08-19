@@ -1,7 +1,7 @@
 ---
- - hosts: all
+ - hosts: java
    roles:
-    - role: common
+    - role: java_common
 
  - hosts: logstash
    roles:
@@ -14,4 +14,8 @@
  - hosts: kibana
    roles:
     - role: kibana
+
+ - hosts: filebeat
+   roles:
+    - role: filebeat
 ...
