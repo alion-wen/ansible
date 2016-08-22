@@ -34,8 +34,13 @@
        src: "patterns/"
        dest: "{{ logstash_basedir }}/patterns"
 
- - name: Setup Logstash Auto Start
-   shell: echo "{{ logstash_basedir }}/bin/logstash -rf {{ logstash_basedir }}/conf/nginx.conf -l {{ logstash_basedir }}/logs/logstash.log &" >> /etc/rc.local 
+ - block:
+    - debug:
+       msg: "Setup Logstash Auto Start"
+    - template:
+        src: "logstash.service.j2"
+        dest: "/lib/systemd/system/logstash.service"
+    - command: "systemctl enable logstash"
        
 
 
