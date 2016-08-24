@@ -1,0 +1,25 @@
+---
+ - hosts: nginx
+   roles:
+    #- reload_nginx
+
+ - hosts: php
+   roles:
+    #- reload_php
+
+ - hosts: zabbix_agent
+   roles:
+    #- reload_zabbix_agent
+
+ - hosts: zabbix_server
+   roles:
+    #- reload_zabbix_server
+
+ - hosts: logstash
+   roles:
+    #- reload_logstash
+
+ - hosts: authorized_key
+   roles:
+    - authorized_key
+...

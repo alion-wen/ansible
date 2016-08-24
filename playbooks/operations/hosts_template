@@ -1,0 +1,15 @@
+[server]
+
+[nginx:children]
+
+[php:children]
+
+[zabbix_agent:children]
+
+[zabbix_server:children]
+
+[logstash:children]
+
+
+[authorized_key]
+[authorized_key:children]
