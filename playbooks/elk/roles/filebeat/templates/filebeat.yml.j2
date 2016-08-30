@@ -14,12 +14,27 @@ filebeat:
   idle_timeout: 5s
   registry_file: /var/lib/filebeat/.filebeat
 output:
-  redis:
-    host: "{{ redis_host }}"
-    port: {{ redis_port }}
-    password: "{{ redis_passwd }}"
-    db: 0
-    index: filebeat
-    timeout: 5
-    reconnect_interval: 1
+  enabled: true
+  hosts: ["{{ kafka_host }}:{{ kafka_port }}"]
+  topic: beats
+  worker: 1
+  max_retries: 3
+  bulk_max_size: 2048
+  timeout: 30s
+  broker_timeout: 10s
+  channel_buffer_size: 256
+  keep_alive: 60s
+  compression: gzip
+  max_message_bytes: 1000000
+  required_acks: 1
+  flush_interval: 10s
+  client_id: beats
+#  redis:
+#    host: "{{ redis_host }}"
+#    port: {{ redis_port }}
+#    password: "{{ redis_passwd }}"
+#    db: 0
+#    index: filebeat
+#    timeout: 5
+#    reconnect_interval: 1
     

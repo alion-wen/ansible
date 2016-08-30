@@ -1,18 +1,21 @@
 input {
-	redis {
-		batch_count => 100
-		host => "{{ redis_host }}"
-		port => {{ redis_port }}
-		password => "{{ redis_passwd }}"
-		db => 0
-		key => "filebeat"
-		data_type => "list"
-		timeout => 5
-		
+	kafka {
+		topics => "beats"
+		type => "beats"
+		auto_commit_interval_ms => "1000"
+		bootstrap_servers => "{{ kafka_host }}:{{ kafka_port }}"
+		client_id => "logstash"
+		group_id  => "logstash"
+		codec => "plain"
+		consumer_threads => 2
 	}
 }
 
 filter {
+
+	mutate {
+		gsub => [ "message", "[\\]", "" ]
+    }
 
 	grok {
 		patterns_dir => ["patterns"]
@@ -45,10 +48,10 @@ filter {
 
 output {
 	elasticsearch {
-    	hosts => ["{{ elasticsearch_host }}:{{ elasticsearch_port }}"]
+    	hosts => ["{{ es_host }}:{{ es_port }}"]
         index => "logstash-%{type}-%{+YYYY.MM.dd}"
         flush_size => 20000
         idle_flush_time => 10
     }
-	stdout { codec => rubydebug }
+	#stdout { codec => rubydebug }
 }

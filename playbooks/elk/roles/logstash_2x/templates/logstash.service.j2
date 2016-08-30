@@ -5,7 +5,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-ExecStart={{ logstash_basedir }}/bin/logstash -rf {{ logstash_basedir }}/conf/redis.conf
+ExecStart={{ logstash_basedir }}/bin/logstash -rf {{ logstash_basedir }}/conf/{{ input }}.conf
 Restart=always
 
 [Install]

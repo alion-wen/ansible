@@ -7,6 +7,10 @@
    roles:
     - role: logstash
 
+ - hosts: logstash_2x
+   roles:
+    - role: logstash_2x
+
  - hosts: elasticsearch
    roles:
     - role: elasticsearch

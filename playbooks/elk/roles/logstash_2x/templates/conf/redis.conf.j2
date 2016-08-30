@@ -1,16 +1,23 @@
 input {
-	file {
-		path => "/data0/logs/nginx/*.access.log" 
-		sincedb_path => "{{ logstash_basedir }}/sincedb/nginx"
-		start_position => "beginning"
-		type => "nginx-access"
+	redis {
+		batch_count => 100
+		host => "{{ redis_host }}"
+		port => {{ redis_port }}
+		password => "{{ redis_passwd }}"
+		db => 0
+		key => "filebeat"
+		data_type => "list"
+		timeout => 5
+		
 	}
 }
 
 filter {
+
 	grok {
 		patterns_dir => ["patterns"]
 		match => { "message" => "%{IP:remote_addr} - %{HTTPDUSER:remote_user} \[%{HTTPDATE:time_local}\] \"%{WORD:method} %{URIPATHPARAM:request} %{DATA:protocol_version}\" %{INT:status} %{INT:body_bytes_sent} %{QS:http_referer} %{QS:http_user_agent} \"%{DATA:http_x_forwarded_for}\" %{QS:host} \"%{NUMBER:request_time}\" \"%{INT:request_length}\" %{QS:upstream_addr} \"%{NUMBER:upstream_response_time}\" \"%{INT:upstream_status}\"" }
+		match => { "client_ip" => "%{IP:http_x_forwarded_for}"}
 		overwrite => [ "host" ]
 		remove_field => [ "message" ]
 	}
@@ -38,10 +45,10 @@ filter {
 
 output {
 	elasticsearch {
-		hosts => ["{{ elasticsearch_host }}:{{ elasticsearch_port }}"]
-		index => "logstash-%{type}-%{+YYYY.MM.dd}"
-		flush_size => 20000
+    	hosts => ["{{ es_host }}:{{ es_port }}"]
+        index => "logstash-%{type}-%{+YYYY.MM.dd}"
+        flush_size => 20000
         idle_flush_time => 10
-	}
-	#stdout { codec => rubydebug }
+    }
+	stdout { codec => rubydebug }
 }

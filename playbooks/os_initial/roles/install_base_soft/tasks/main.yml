@@ -40,6 +40,8 @@
     - bzip2
     - httpd-tools
     - tree
+    - zip
+    - unzip
 
  - name: Install Debug Software
    yum: 

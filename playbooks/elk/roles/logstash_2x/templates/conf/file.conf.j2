@@ -1,0 +1,47 @@
+input {
+	file {
+		path => "/data0/logs/nginx/*.access.log" 
+		sincedb_path => "{{ logstash_basedir }}/sincedb/nginx"
+		start_position => "beginning"
+		type => "nginx-access"
+	}
+}
+
+filter {
+	grok {
+		patterns_dir => ["patterns"]
+		match => { "message" => "%{IP:remote_addr} - %{HTTPDUSER:remote_user} \[%{HTTPDATE:time_local}\] \"%{WORD:method} %{URIPATHPARAM:request} %{DATA:protocol_version}\" %{INT:status} %{INT:body_bytes_sent} %{QS:http_referer} %{QS:http_user_agent} \"%{DATA:http_x_forwarded_for}\" %{QS:host} \"%{NUMBER:request_time}\" \"%{INT:request_length}\" %{QS:upstream_addr} \"%{NUMBER:upstream_response_time}\" \"%{INT:upstream_status}\"" }
+		overwrite => [ "host" ]
+		remove_field => [ "message" ]
+	}
+	
+	if [http_x_forwarded_for] !~ "-" {
+		mutate {
+			split => { "http_x_forwarded_for" => "," }
+			add_field => { "client_ip" => "%{[http_x_forwarded_for][0]}"}
+		}
+	}
+
+	date {
+		match => [ "time_local" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+	}
+
+	geoip {
+		source => "client_ip"
+	}
+
+	useragent {
+		source => "http_user_agent"
+		target => "user_agent"
+	}
+}
+
+output {
+	elasticsearch {
+		hosts => ["{{ es_host }}:{{ es_port }}"]
+		index => "logstash-%{type}-%{+YYYY.MM.dd}"
+		flush_size => 20000
+        idle_flush_time => 10
+	}
+	#stdout { codec => rubydebug }
+}

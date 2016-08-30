@@ -1,10 +1,10 @@
 ---
-package_url_prefix: "http://storage.ops.zhangshangduobao.net/Packages"
-tempdir: "/tmp"
+url_prefix: "http://storage.ops.zhangshangduobao.net/Packages"
 
 #logstash
-logstash_package_name: "logstash-2.3.4"
-logstash_package_fullname: "{{ logstash_package_name }}.tar.gz"
-logstash_package_url: "{{ package_url_prefix }}/elk/logstash/{{ logstash_package_fullname }}"
-logstash_basedir: "/usr/local/webserver/logstash"
+name: "logstash"
+version: "5.0.0-alpha5"
+package_fullname: "{{ name }}-{{ version }}.rpm"
+package_url: "{{ url_prefix }}/elk/logstash/{{ package_fullname }}"
+confdir: "/etc/logstash"
 

@@ -1,0 +1,9 @@
+---
+ - hosts: kafka
+   roles:
+    - role: common
+
+ - hosts: kafka
+   roles:
+    - role: kafka
+...
