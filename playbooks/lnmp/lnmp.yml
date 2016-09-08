@@ -2,6 +2,6 @@
  - hosts: new
    roles:
     - nginx
-    - php
-    - mysql
+    #- php
+    #- mysql
 ...

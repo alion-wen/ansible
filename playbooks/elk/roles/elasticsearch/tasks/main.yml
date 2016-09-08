@@ -29,10 +29,9 @@
     - {item: memlock, type: -, value: unlimited}
 
  - name: Download ES Package
-   uri: 
+   get_url: 
     url: "{{ package_url }}"
-    dest: "{{ tempdir }}"
-    creates: "{{ tempdir }}/{{ fullname }}"
+    dest: "{{ tempdir }}/{{ fullname }}"
 
  - block:
     - debug:

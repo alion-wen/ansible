@@ -1,0 +1,57 @@
+---
+ - name: Download Kibana Package
+   #get_url: 
+   # url: "{{ package_url }}"
+   # dest: "{{ tempdir }}/{{ fullname }}"
+   uri:
+    url: "{{ package_url }}"
+    dest: "{{ tempdir }}"
+    creates: "{{ tempdir }}/{{ fullname }}"
+    validate_certs: yes
+
+ - block:
+    - debug:
+       msg: "Install Kibana"
+    - unarchive:
+       src: "{{ tempdir }}/{{ fullname }}" 
+       dest: "{{ tempdir }}"
+       #owner: "{{ users.0.user }}"
+       #group: "{{ users.0.user }}"
+       copy: no
+       creates: "{{ tempdir }}/{{ name }}-{{ version }}"
+    - synchronize:
+       src: "{{ tempdir }}/{{ name }}-{{ version }}/"
+       dest: "{{ basedir }}"
+      delegate_to: "{{ inventory_hostname }}"
+    - template:
+       src: "{{ item }}.j2"
+       dest: "{{ basedir }}/{{ item }}"
+      with_items:
+       - "config/kibana.yml"
+    #- file:
+    #   path: "{{ item }}"
+       #owner: "{{ users.0.user }}"
+       #group: "{{ users.0.user }}"
+    #   recurse: yes
+    #   state: directory
+    #  with_items: "{{ datadir }}"
+
+ - name: Configure Kibana Nginx Reverse Proxy
+   template:
+    src: "{{ item }}.j2"
+    dest: "{{ nginx_basedir }}/conf/vhosts/{{ item }}"
+   with_items:
+    - "kibana.miguan.com.conf"
+   notify:
+    - Reload Nginx
+
+ - block:
+    - debug:
+       msg: "Setup Kibana Auto Start"
+    - template:
+        src: "{{ item }}.j2"
+        dest: "/etc/systemd/system/{{ item }}"
+      with_items:
+       - "kibana.service"
+    - shell: "systemctl enable kibana"
+...
