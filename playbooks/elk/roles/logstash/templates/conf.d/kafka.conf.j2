@@ -1,7 +1,7 @@
 input {
 	kafka {
 		topics => "beats"
-		type => "beats"
+		#type => "beats"
 		auto_commit_interval_ms => "1000"
 		bootstrap_servers => "{{ kafka_host }}:{{ kafka_port }}"
 		client_id => "logstash"
@@ -22,7 +22,7 @@ filter {
 		match => { "message" => "%{IP:remote_addr} - %{HTTPDUSER:remote_user} \[%{HTTPDATE:time_local}\] \"%{WORD:method} %{URIPATHPARAM:request} %{DATA:protocol_version}\" %{INT:status} %{INT:body_bytes_sent} %{QS:http_referer} %{QS:http_user_agent} \"%{DATA:http_x_forwarded_for}\" %{QS:host} \"%{NUMBER:request_time}\" \"%{INT:request_length}\" %{QS:upstream_addr} \"%{NUMBER:upstream_response_time}\" \"%{INT:upstream_status}\"" }
 		match => { "client_ip" => "%{IP:http_x_forwarded_for}"}
 		overwrite => [ "host" ]
-		remove_field => [ "message" ]
+		remove_field => [ "message" , "source" , "offset" ]
 	}
 	
 	if [http_x_forwarded_for] !~ "-" {
