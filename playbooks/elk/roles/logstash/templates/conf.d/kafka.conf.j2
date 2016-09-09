@@ -1,7 +1,6 @@
 input {
 	kafka {
 		topics => "beats"
-		#type => "beats"
 		auto_commit_interval_ms => "1000"
 		bootstrap_servers => "{{ kafka_host }}:{{ kafka_port }}"
 		client_id => "logstash"

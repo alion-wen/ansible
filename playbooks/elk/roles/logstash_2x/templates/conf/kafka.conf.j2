@@ -1,8 +1,7 @@
 input {
 	kafka {
-		type => "beats"
-		auto_commit_interval_ms => "1000"
 		topic_id => "beats"
+		auto_commit_interval_ms => "1000"
 		group_id  => "logstash"
 		codec => "json"
 		consumer_threads => 2
