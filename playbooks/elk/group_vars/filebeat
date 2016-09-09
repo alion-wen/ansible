@@ -1,2 +1,4 @@
 ---
-filebeat_rpm: "https://download.elastic.co/beats/filebeat/filebeat-1.2.3-x86_64.rpm"
+filebeat_rpm: "https://download.elastic.co/beats/filebeat/filebeat-5.0.0-alpha4-x86_64.rpm"
+logdir: "/data0/logs"
+type: "nginx"
