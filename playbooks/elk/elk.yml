@@ -22,4 +22,8 @@
  - hosts: filebeat
    roles:
     - role: filebeat
+
+ - hosts: heka
+   roles:
+    - role: heka
 ...

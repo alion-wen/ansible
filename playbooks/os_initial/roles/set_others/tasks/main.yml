@@ -18,6 +18,7 @@
    file: 
     path: /etc/rc.d/rc.local
     mode: "u+x"
+    state: file
 
  - name: Update Kernel
    yum:
