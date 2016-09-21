@@ -1,5 +1,6 @@
 ---
 url_prefix: "https://download.elastic.co/logstash/logstash/packages/centos"
+tempdir: "/tmp"
 
 #logstash
 name: "logstash"

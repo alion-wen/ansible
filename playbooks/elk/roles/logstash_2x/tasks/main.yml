@@ -41,7 +41,7 @@
        msg: "Setup Logstash Auto Start"
     - template:
         src: "logstash.service.j2"
-        dest: "/lib/systemd/system/logstash.service"
+        dest: "/etc/systemd/system/logstash.service"
     - command: "systemctl enable logstash"
        
 

@@ -2,7 +2,7 @@
  - name: Install Nginx
    yum:
     name: "{{ nginx_package_url }}"
-    state: present
+    state: installed
  
  - block:
     - debug:

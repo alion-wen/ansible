@@ -1,4 +1,9 @@
 ---
-filebeat_rpm: "https://download.elastic.co/beats/filebeat/filebeat-5.0.0-alpha4-x86_64.rpm"
+url_prefix: "https://download.elastic.co/beats/filebeat"
+tempdir: "/tmp"
+
+#filebeat
+name: "filebeat-5.0.0-alpha5-x86_64.rpm"
+package_url: "{{ url_prefix }}/{{ name }}"
 logdir: "/data0/logs"
 type: "nginx"

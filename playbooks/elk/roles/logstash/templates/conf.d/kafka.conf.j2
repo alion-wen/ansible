@@ -12,10 +12,6 @@ input {
 
 filter {
 
-	mutate {
-		gsub => [ "message", "[\\]", "" ]
-    }
-
 	grok {
 		patterns_dir => ["patterns"]
         match => { "message" => "%{NGINX_ACCESS}"}

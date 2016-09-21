@@ -8,5 +8,5 @@ logstash_package_url: "{{ package_url_prefix }}/{{ logstash_package_fullname }}"
 logstash_basedir: "/usr/local/webserver/logstash"
 tempdir: "/tmp"
 
-input: "kafka"
+input: "redis"
 

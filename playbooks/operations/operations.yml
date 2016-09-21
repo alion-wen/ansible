@@ -1,7 +1,7 @@
 ---
  - hosts: nginx
    roles:
-    #- reload_nginx
+    - reload_nginx
 
  - hosts: php
    roles:
@@ -9,7 +9,7 @@
 
  - hosts: zabbix_agent
    roles:
-    #- reload_zabbix_agent
+    - reload_zabbix_agent
 
  - hosts: zabbix_server
    roles:

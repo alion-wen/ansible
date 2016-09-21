@@ -1,7 +1,12 @@
 ---
+ - name: Download Filebeat Package
+   uri:
+    url: "{{ package_url }}"
+    dest: "{{ tempdir }}"
+    creates: "{{ tempdir }}/{{ name }}"
  - name: Install Filebeat
    yum: 
-    name: "{{ filebeat_rpm }}"
+    name: "{{ tempdir }}/{{ name }}"
     state: present
 
  - name: Copy Templates
@@ -12,5 +17,5 @@
     - Restart Filebeat
 
  - name: Setup Auto Start When System Boot
-   command: "systemctl enable filebeat"
+   command: "systemctl is-enabled filebeat || systemctl enable filebeat"
 ...
