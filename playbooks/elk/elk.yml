@@ -26,4 +26,8 @@
  - hosts: heka
    roles:
     - role: heka
+
+ - hosts: curator
+   roles:
+    - role: curator
 ...

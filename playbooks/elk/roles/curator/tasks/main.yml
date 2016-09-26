@@ -1,0 +1,32 @@
+---
+ - name: Install Curator
+   pip:
+    name: "elasticsearch-curator"
+    state: present
+    #virtualenv: "/data0/python/venv"
+    #virtualenv_python: 3.4
+    #virtualenv_site_packages: yes
+
+ - name: Make Directory ~/.curator and /etc/curator/actions
+   file:
+    path: "~/.curator"
+    state: directory
+   with_items:
+    - "~/.curator"
+    - "/etc/curator/actions"
+
+ - name: Generate Configure Curator.yml
+   template:
+    dest: "~/.curator/curator.yml"
+    src: "curator.yml.j2"
+
+ - name: Generate Curator actions
+   copy:
+    dest: "/etc/curator/actions/"
+    src: "{{ item }}"
+   with_fileglob:
+    - actions/*.yml
+
+ #- name: Setup Auto Start When System Boot
+ #  command: "systemctl is-enabled filebeat || systemctl enable filebeat"
+...
