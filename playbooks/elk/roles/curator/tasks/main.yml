@@ -3,9 +3,6 @@
    pip:
     name: "elasticsearch-curator"
     state: present
-    #virtualenv: "/data0/python/venv"
-    #virtualenv_python: 3.4
-    #virtualenv_site_packages: yes
 
  - name: Make Directory ~/.curator and /etc/curator/actions
    file:
@@ -27,6 +24,16 @@
    with_fileglob:
     - actions/*.yml
 
- #- name: Setup Auto Start When System Boot
- #  command: "systemctl is-enabled filebeat || systemctl enable filebeat"
+ - name: Add Crontab
+   cron:
+    name: "{{ item.name }}"
+    state: present
+    hour: 2
+    minute: 30
+    user: root
+    job: "{{ item.job }}"
+   with_items:
+    - { name: 'ELK Auto Create Snapshot Every Day', job: '/usr/bin/curator /etc/curator/snapshot.yml' }
+    - { name: 'ELK Auto Delete Snapshot Every Day', job: '/usr/bin/curator /etc/curator/delete_snapshots.yml' }
+    - { name: 'ELK Auto Delete Indices Every Day', job: '/usr/bin/curator /etc/curator/delete_indices.yml' }
 ...

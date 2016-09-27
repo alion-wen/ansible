@@ -29,9 +29,10 @@
     - {item: memlock, type: -, value: unlimited}
 
  - name: Download ES Package
-   get_url: 
+   uri: 
     url: "{{ package_url }}"
     dest: "{{ tempdir }}/{{ fullname }}"
+    creates: "{{ tempdir }}/{{ fullname }}"
 
  - block:
     - debug:
@@ -59,7 +60,9 @@
        group: "{{ users.0.user }}"
        recurse: yes
        state: directory
-      with_items: "{{ datadir }}"
+      with_items: 
+       - "{{ datadir }}"
+       - "{{ backdir }}"
 
  - block:
     - debug:

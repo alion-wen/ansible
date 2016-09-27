@@ -12,14 +12,14 @@ actions:
       Delete snapshots from the selected repository older than 30 days
       (based on creation_date), for 'curator-' prefixed snapshots.
     options:
-      repository:
+      repository: kibana
       timeout_override:
       continue_if_exception: False
       disable_action: False
     filters:
     - filtertype: pattern
       kind: prefix
-      value: curator-
+      value: kibana-
       exclude:
     - filtertype: age
       source: creation_date
