@@ -7,7 +7,7 @@ filebeat.registry_file: ${path.data}/registry
 filebeat.prospectors:
  - paths:
     - {{ logdir }}/{{ type }}/*.access.log
-   exclude_files: ["default_server.access.log"]
+   exclude_files: [ "default_server.access.log" ]
    input_type: log
    document_type: {{ type }}
    ignore_older: 24h
@@ -19,7 +19,7 @@ filebeat.prospectors:
 
 output.kafka:
   enabled: false
-  hosts: ["{{ kafka_host }}:{{ kafka_port }}"]
+  hosts: [ "{{ kafka_host }}:{{ kafka_port }}" ]
   topic: beats
   worker: 1
   max_retries: 3
@@ -37,7 +37,7 @@ output.kafka:
 output.redis:
   enabled: true
   loadbalance: true
-  hosts: ["{{ redis_host }}"]
+  hosts: [ "{{ redis_host }}" ]
   port: {{ redis_port }}
   password: "{{ redis_passwd }}"
   db: 0

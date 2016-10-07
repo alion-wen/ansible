@@ -15,7 +15,4 @@
     src: "filebeat.yml.j2"
    notify:
     - Restart Filebeat
-
- - name: Setup Auto Start When System Boot
-   command: "systemctl is-enabled filebeat || systemctl enable filebeat"
 ...

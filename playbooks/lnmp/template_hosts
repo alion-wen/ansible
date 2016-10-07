@@ -1,0 +1,16 @@
+[lnmp]
+
+[nginx]
+
+[nginx:children]
+lnmp
+
+[php]
+
+[php:children]
+lnmp
+
+[mysql]
+
+[mysql:children]
+lnmp

@@ -4,16 +4,12 @@
     name: "{{ Zabbix_Agent_Package }}"
     state: present
    when: "ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'"
-   notify:
-    - Restart Zabbix-agentd On CentOS 7
 
  - name: Install Zabbix-agentd On CentOS 6
    yum: 
     name: "{{ Zabbix_Agent_Package }}"
     state: present
    when: "ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'"
-   notify:
-    - Restart Zabbix-agentd On CentOS 6
 
  - name: Copy Zabbix_agent.conf
    template: 
@@ -32,4 +28,6 @@
     password: "{{ SVN_PASSWD }}"
     dest: /etc/zabbix/zabbix_agentd.d
     force: yes
+   notify:
+    - Restart Zabbix-agentd
 ...

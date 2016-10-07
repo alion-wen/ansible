@@ -1,7 +1,13 @@
 ---
- - hosts: new
+ - hosts: nginx
    roles:
     - nginx
-    #- php
-    #- mysql
+
+ - hosts: php
+   roles:
+    - php
+
+ - hosts: mysql
+   roles:
+    - mysql
 ...
