@@ -1,9 +1,9 @@
 ---
-url_prefix: "https://download.elastic.co/beats/filebeat"
+url_prefix: "https://artifacts.elastic.co/downloads/beats/filebeat/"
 tempdir: "/tmp"
 
 #filebeat
-name: "filebeat-5.0.0-alpha5-x86_64.rpm"
+name: "filebeat-5.0.0-beta1-x86_64.rpm"
 package_url: "{{ url_prefix }}/{{ name }}"
 logdir: "/data0/logs"
 type: "nginx"
