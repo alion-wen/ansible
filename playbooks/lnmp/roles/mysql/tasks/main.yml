@@ -33,11 +33,17 @@
     state: present
    with_items: "{{ tools_package_url }}"
 
+
+ - name: Add Mysql Libs Configuration
+   template:
+    src: "lib_mysql.conf.j2"
+    dest: "/etc/ld.so.conf.d/mysql.conf"
+
+ - name: Ldconfig
+   shell: ldconfig
+
  - name: Start Daemon When System Boot
    shell: echo "{{ mysql_datadir }}/{{ mysql_port }}/mysqld start" >> /etc/rc.local
-
- - name: Ldconfig Mysql Libs
-   shell: echo "{{ mysql_install_dir }}/lib" >> /etc/ld.so.conf.d/mysql.conf && ldconfig
 
  - name: Export PATH
    shell: echo "export PATH={{ mysql_install_dir }}/bin:\$PATH" >> /root/.bash_profile

@@ -1,5 +1,5 @@
 ---
-url_prefix: "https://artifacts.elastic.co/downloads/beats/filebeat/"
+url_prefix: "http://storage.ops.zhangshangduobao.net/Packages/elk/filebeat"
 tempdir: "/tmp"
 
 #filebeat
