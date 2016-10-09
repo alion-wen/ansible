@@ -19,6 +19,11 @@
     path: /etc/rc.d/rc.local
     mode: "u+x"
     state: file
+ - name: Set Pip Command Automatic Completion(Copy Bash_profile To Home Directory)
+#   shell: "pip completion --bash >> ~/.bash_profile"
+   copy:
+    src: "bash_profile" 
+    dest: "~/.bash_profile"
 
  - name: Update Kernel
    yum:
