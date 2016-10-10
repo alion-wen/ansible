@@ -21,6 +21,7 @@
     - tcl
     - libffi-devel
     - deltarpm
+    - bash-completion
 
  - name: Install Tools Software
    yum: 
