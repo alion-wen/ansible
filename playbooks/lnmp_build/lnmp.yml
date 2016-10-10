@@ -1,5 +1,5 @@
 ---
- - hosts: new
+ - hosts: all
    roles:
     - nginx
     - php
