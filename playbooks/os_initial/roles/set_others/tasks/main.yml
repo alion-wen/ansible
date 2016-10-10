@@ -20,12 +20,6 @@
     mode: "u+x"
     state: file
 
- - name: Set Pip Subcommand Automatic Completion(Copy Bash_profile To Home Directory)
-#   shell: "pip completion --bash >> ~/.bash_profile"
-   copy:
-    src: "bash_profile" 
-    dest: "~/.bash_profile"
-
  - name: Set System Command's Subcommand Automatic Completion
    command: "source /usr/share/bash-completion/bash_completion"
 
