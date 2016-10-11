@@ -1,11 +1,7 @@
 ---
 url_prefix: "https://download.elastic.co/logstash/logstash/packages/centos"
-tempdir: "/tmp"
-
-#logstash
 name: "logstash"
 version: "5.0.0-alpha5"
 package_fullname: "{{ name }}-{{ version }}.rpm"
 package_url: "{{ url_prefix }}/{{ package_fullname }}"
 confdir: "/etc/logstash"
-

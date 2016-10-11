@@ -1,4 +1,7 @@
 ---
+ - include_vars:
+    - "secret.yml"
+
  - name: Install Dependent Packages
    yum:
     name: "{{ item }}"

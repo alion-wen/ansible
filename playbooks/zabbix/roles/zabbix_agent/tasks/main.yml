@@ -1,4 +1,7 @@
 ---
+ - include_vars:
+    - "secret.yml"
+
  - name: Install Zabbix-agentd On CentOS 7
    yum: 
     name: "{{ Zabbix_Agent_Package }}"

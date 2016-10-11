@@ -1,4 +1,7 @@
 ---
+ - include_vars: 
+    - "secret.yml"
+
  - name: Install Heka
    yum: 
     name: "{{ heka_rpm }}"

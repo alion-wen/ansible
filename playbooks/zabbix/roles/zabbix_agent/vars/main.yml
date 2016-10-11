@@ -1,3 +1,3 @@
-Zabbix_Server_IP: "miguanvpn.f3322.net"
+---
 Mode: "active"
 Zabbix_Agent_Package: "http://mirrors.aliyun.com/zabbix/zabbix/3.0/rhel/{{ ansible_distribution_major_version }}/{{ ansible_machine }}/zabbix-agent-3.0.3-1.el{{ ansible_distribution_major_version }}.{{ ansible_machine }}.rpm"

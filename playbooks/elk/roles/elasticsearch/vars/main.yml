@@ -12,4 +12,3 @@ tempdir: "/tmp"
 datadir: ["/data0/elasticsearch/data0" ,"/data0/elasticsearch/data1"]
 backdir: ["/data0/backups/elasticsearch"]
 users: [{user: elasticsearch, id: 305, comment: "ES Server"}]
-

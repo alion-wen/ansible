@@ -1,5 +1,6 @@
 ---
  - hosts: all
    roles:
-    - role: docker-engine
+    #- role: docker-engine
+    - role: docker-machine
 ...

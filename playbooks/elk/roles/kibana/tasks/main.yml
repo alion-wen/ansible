@@ -1,4 +1,7 @@
 ---
+ - include_vars:
+    - "secret.yml"
+
  - name: Download Kibana Package
    #get_url: 
    # url: "{{ package_url }}"

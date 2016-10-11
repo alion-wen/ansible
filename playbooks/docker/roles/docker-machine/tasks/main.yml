@@ -1,0 +1,9 @@
+---
+ - include_vars: 
+    - "secret.yml"
+
+ - name: Install Docker-machine
+   uri:
+    url: "{{ url }}"
+    dest: "{{ tempdir }}/{{ name }}"
+    creates: yes

@@ -1,4 +1,7 @@
 ---
+ - include_vars:
+    - "secret.yml"
+
  - name: Download Filebeat Package
    uri:
     url: "{{ package_url }}"

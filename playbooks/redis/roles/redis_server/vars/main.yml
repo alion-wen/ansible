@@ -1,8 +1,5 @@
 ---
-build_dir: /tmp
 package_url_prefix: "http://download.redis.io/releases"
-
-#redis
 redis_package: redis-3.2.3
 redis_port: 6379
 redis_package_url: "{{ package_url_prefix }}/{{ redis_package }}.tar.gz"
@@ -10,4 +7,3 @@ scripts_url: "https://github.com/chenjianbin/scripts.git"
 redis_install_dir: /usr/local/webserver/redis
 redis_instance_dir: /data0/redis
 scripts_dir: /data0/scripts
-

@@ -1,7 +1,4 @@
 ---
-url_prefix: "http://storage.ops.zhangshangduobao.net/Packages/elk/filebeat"
-tempdir: "/tmp"
-
 #filebeat
 name: "filebeat-5.0.0-beta1-x86_64.rpm"
 package_url: "{{ url_prefix }}/{{ name }}"

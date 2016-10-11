@@ -1,4 +1,7 @@
 ---
+ - include_vars:
+    - "secret.yml"
+
  - name: Install Mysql
    yum:
     name: "{{ mysql_package_url }}"
