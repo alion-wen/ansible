@@ -1,5 +1,7 @@
 ---
- - include_vars: 
+ - name: Import Secret Vars
+   include_vars: "{{ item }}"
+   with_items:
     - "secret.yml"
 
  - name: Install Dependent Packages
