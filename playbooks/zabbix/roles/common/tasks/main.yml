@@ -1,6 +1,0 @@
----
- - name: install dependent packages
-   yum: 
-    name: unixODBC 
-    state: present
-...

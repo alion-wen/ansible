@@ -1,8 +1,13 @@
 ---
+#安装基础软件,如果失败了,重试3次,每次间隔1秒.
  - name: Install Basic Software
    yum: 
     name: "{{ item }}"
     state: present
+   register: result
+   until: result.rc ==  1 or result.rc == 0
+   retries: 3
+   delay: 1
    with_items: 
     - ntp 
     - vim-enhanced

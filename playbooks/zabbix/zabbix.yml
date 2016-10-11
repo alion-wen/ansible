@@ -1,7 +1,6 @@
 ---
  - hosts: all
    roles:
-    - role: common
     - role: zabbix_agent
 # - hosts: zabbix_agent
 #   roles:

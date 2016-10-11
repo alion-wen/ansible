@@ -4,6 +4,11 @@
    with_items:
     - "secret.yml"
 
+ - name: install dependent packages
+   yum: 
+    name: unixODBC 
+    state: present
+
  - name: Install Zabbix-agentd On CentOS 7
    yum: 
     name: "{{ Zabbix_Agent_Package }}"

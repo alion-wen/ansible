@@ -11,11 +11,5 @@
 
 [curator]
 
-[java:children]
-logstash
-elasticsearch
-kibana
-
-
 #未写完
 [heka]

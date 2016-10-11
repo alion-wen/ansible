@@ -1,8 +1,4 @@
 ---
- - hosts: java
-   roles:
-    - role: java_common
-
  - hosts: logstash
    roles:
     - role: logstash
