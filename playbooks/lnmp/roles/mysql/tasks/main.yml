@@ -4,14 +4,38 @@
    with_items:
     - "secret.yml"
 
+ - name: Get Mysql RPM 
+   uri:
+    url: "{{ mysql_package_url }}"
+    dest: "{{ tempdir }}/{{ package_name }}"
+    creates: "{{ tempdir }}/{{ package_name }}"
+
  - name: Install Mysql
    yum:
-    name: "{{ mysql_package_url }}"
+    name: "{{ tempdir }}/{{ package_name }}"
     state: present
+
+
+ - name: Install Mysql Tools
+   yum:
+    name: "{{ item }}"
+    state: present
+   with_items: "{{ tools_package_url }}"
+
+ - name: Add Mysql Libs Configuration
+   template:
+    src: "lib_mysql.conf.j2"
+    dest: "/etc/ld.so.conf.d/mysql.conf"
+
+ - name: Ldconfig
+   shell: ldconfig
+
+ - name: Export PATH
+   shell: echo "export PATH={{ mysql_install_dir }}/bin:\$PATH" >> /root/.bash_profile
 
  - block:
     - debug:
-       msg: Generate Mysql Data Directory
+       msg: Initail Mysql Data Directory
     - file:
        path: "{{ mysql_datadir }}/{{ mysql_port }}/{{ item }}"
        state: directory
@@ -32,25 +56,7 @@
        - {name: mysqld, mode: 700}
     - shell: "{{ mysql_install_dir }}/scripts/mysql_install_db --defaults-file={{ mysql_datadir }}/{{ mysql_port }}/my.cnf --basedir={{ mysql_install_dir }}"
 
- - name: Install Mysql Tools
-   yum:
-    name: "{{ item }}"
-    state: present
-   with_items: "{{ tools_package_url }}"
-
-
- - name: Add Mysql Libs Configuration
-   template:
-    src: "lib_mysql.conf.j2"
-    dest: "/etc/ld.so.conf.d/mysql.conf"
-
- - name: Ldconfig
-   shell: ldconfig
-
  - name: Start Daemon When System Boot
    shell: echo "{{ mysql_datadir }}/{{ mysql_port }}/mysqld start" >> /etc/rc.local
-
- - name: Export PATH
-   shell: echo "export PATH={{ mysql_install_dir }}/bin:\$PATH" >> /root/.bash_profile
 
 ...

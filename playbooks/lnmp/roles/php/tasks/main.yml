@@ -1,4 +1,9 @@
 ---
+ - name: Import Secret Vars
+   include_vars: "{{ item }}"
+   with_items:
+    - "secret.yml"
+
  - name: Install PHP
    yum:
     name: "{{ php_package_url }}"

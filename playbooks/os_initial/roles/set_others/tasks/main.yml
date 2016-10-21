@@ -21,7 +21,7 @@
     state: file
 
  - name: Set System Command's Subcommand Automatic Completion
-   command: "source /usr/share/bash-completion/bash_completion"
+   shell: "source /usr/share/bash-completion/bash_completion"
 
  - name: Update Kernel
    yum:

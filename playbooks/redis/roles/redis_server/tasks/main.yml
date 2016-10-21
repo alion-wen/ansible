@@ -33,11 +33,12 @@
        repo: "{{ scripts_url }}"
        dest: "{{ scripts_dir }}"
        clone: yes
-      when: result.rc == 2
-    - git: 
-       repo: "{{ scripts_url }}"
-       dest: "{{ scripts_dir }}"
-      when: result.rc == 0
+       force: yes
+   #   when: result.rc == 2
+   # - git: 
+   #    repo: "{{ scripts_url }}"
+   #    dest: "{{ scripts_dir }}"
+   #   when: result.rc == 0
     - command: /bin/bash "{{ scripts_dir }}/redis/redis_gen.sh" "{{ redis_port }}"
       notify:
        - Restart Redis
