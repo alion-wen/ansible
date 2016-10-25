@@ -5,7 +5,7 @@
 
  - hosts: php
    roles:
-    #- reload_php
+    - reload_php
 
  - hosts: zabbix_agent
    roles:
@@ -13,11 +13,11 @@
 
  - hosts: zabbix_server
    roles:
-    #- reload_zabbix_server
+    - reload_zabbix_server
 
  - hosts: logstash
    roles:
-    #- reload_logstash
+    - reload_logstash
 
  - hosts: authorized_key
    roles:
