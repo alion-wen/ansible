@@ -9,6 +9,12 @@
     url: "{{ package_url }}"
     dest: "{{ tempdir }}"
     creates: "{{ tempdir }}/{{ name }}"
+
+ - name: Uninstall Filebeat
+   yum: 
+    name: "filebeat"
+    state: absent
+
  - name: Install Filebeat
    yum: 
     name: "{{ tempdir }}/{{ name }}"
@@ -18,6 +24,10 @@
    template:
     dest: "/etc/filebeat/filebeat.yml"
     src: "filebeat.yml.j2"
-   notify:
-    - Restart Filebeat
+
+ - name: Set Filebet Auto Start
+   service:
+    name: "filebeat"
+    state: "restarted"
+    enabled: yes
 ...

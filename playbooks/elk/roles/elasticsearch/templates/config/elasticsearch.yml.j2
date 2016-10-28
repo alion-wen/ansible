@@ -26,14 +26,13 @@ node.name: node-{{ ansible_all_ipv4_addresses[0] }}
 #
 # Add custom attributes to the node:
 #
-# node.rack: r1
+# node.attr.rack: r1
 #
 # ----------------------------------- Paths ------------------------------------
 #
 # Path to directory where to store the data (separate multiple locations by comma):
 #
 # path.data: /path/to/data
-# path.data: {{ datadir|join(',')}}
 path.data: {{ datadir|to_json }}
 #
 # Path to log files:
@@ -102,3 +101,5 @@ http.port: 9200
 #
 # action.destructive_requires_name: true
 action.destructive_requires_name: true
+action.auto_create_index: logstash*,.kibana,.security,.monitoring*,.watches,.triggered_watches,.watcher-history*
+xpack.security.audit.enabled: true

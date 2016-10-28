@@ -1,4 +1,9 @@
 ---
+ - name: Import Secret Vars
+   include_vars: "{{ item }}"
+   with_items:
+    - "secret.yml"
+
  - name: Add Es Groups
    group:
     name: "{{ item.user }}"
@@ -18,6 +23,15 @@
     state: present
     system: yes
    with_items: "{{ users }}"
+
+ - name: Sysctl vm.max_map_count
+   sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: yes
+   with_items:
+    - {name: vm.max_map_count, value: 262144}
 
  - name: Unlimit Mlockall
    pam_limits:
@@ -68,9 +82,26 @@
     - debug:
        msg: "Setup ES Auto Start"
     - template:
-        src: "{{ item }}.j2"
-        dest: "/etc/systemd/system/{{ item }}"
+       src: "{{ item }}.j2"
+       dest: "/etc/systemd/system/{{ item }}"
       with_items:
        - "elasticsearch.service"
-    - shell: "systemctl enable elasticsearch"
+    - service:
+       name: "elasticsearch"
+       state: "restarted"
+       enabled: yes
+
+ - block:
+    - debug:
+       msg: "Install X-Pack"
+    - shell: "{{ basedir }}/bin/elasticsearch-plugin install x-pack"
+    - uri:
+       url: "http://localhost:9200/_xpack/security/user/elastic/_password?pretty"
+       user: "elastic"
+       password: "changeme"
+       method: "PUT"
+       body_format: "json"
+       body: "{ 'password': {{es.password}} }"
+       force_basic_auth: yes
+       
 ...

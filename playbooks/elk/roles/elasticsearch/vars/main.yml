@@ -1,12 +1,12 @@
 ---
-url_prefix: "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch"
+#url_prefix: "https://artifacts.elastic.co/downloads/elasticsearch"
 
 #elasticsearch install info
 name: "elasticsearch"
-version: "5.0.0-alpha5"
+version: "5.0.0"
 suffix: "tar.gz"
 fullname: "{{ name }}-{{ version }}.{{ suffix }}"
-package_url: "{{ url_prefix }}/{{ version }}/{{ fullname }}"
+package_url: "{{ url_prefix }}/{{ fullname }}"
 basedir: "/usr/local/webserver/{{ name }}"
 tempdir: "/tmp"
 datadir: ["/data0/elasticsearch/data0" ,"/data0/elasticsearch/data1"]

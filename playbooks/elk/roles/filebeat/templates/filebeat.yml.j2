@@ -19,7 +19,7 @@ filebeat.prospectors:
 
 output.kafka:
   enabled: false
-  hosts: [ "{{ kafka_host }}:{{ kafka_port }}" ]
+  hosts: [ "{{ kafka.host }}:{{ kafka.port }}" ]
   topic: beats
   worker: 1
   max_retries: 3
@@ -37,9 +37,9 @@ output.kafka:
 output.redis:
   enabled: true
   loadbalance: true
-  hosts: [ "{{ redis_host }}" ]
-  port: {{ redis_port }}
-  password: "{{ redis_passwd }}"
+  hosts: [ "{{ redis.host }}" ]
+  port: {{ redis.port }}
+  password: "{{ redis.passwd }}"
   db: 0
   key: beats
   datatype: list #channel

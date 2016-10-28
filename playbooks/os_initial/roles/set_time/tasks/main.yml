@@ -9,20 +9,11 @@
     dest: /etc/localtime
    when: ansible_distribution_major_version != '7'
 
- - block: 
-    - command: systemctl status ntpd
-      register: ntpd_status
-      ignore_errors: True
-    - shell: systemctl stop ntpd && systemctl disable ntpd
-      when: "'running' in ntpd_status.stdout"
-   when: ansible_distribution_major_version == '7'
-
- - name: Close Ntpd Service On CentOS 6
+ - name: Close Ntpd Service
    service:
     name: ntpd
     state: stopped
     enabled: no
-   when: ansible_distribution_major_version != '7'
 
  - name: Sync Datetime Crontab
    cron: 
@@ -31,9 +22,9 @@
     hour: 2 
     minute: 15  
     user: root 
-    job: "/usr/sbin/ntpdate ntp.api.bz > /dev/null 2>&1;/usr/sbin/hwclock -w > /dev/null 2>&1"
+    job: "/usr/sbin/ntpdate 0.centos.pool.ntp.org 1.centos.pool.ntp.org 2.centos.pool.ntp.org 3.centos.pool.ntp.org > /dev/null 2>&1;/usr/sbin/hwclock -w > /dev/null 2>&1"
 
  - name: Sync Datetime
-   shell: /usr/sbin/ntpdate ntp.api.bz && /usr/sbin/hwclock -w
+   shell: /usr/sbin/ntpdate 0.centos.pool.ntp.org 1.centos.pool.ntp.org 2.centos.pool.ntp.org 3.centos.pool.ntp.org && /usr/sbin/hwclock -w
    ignore_errors: True
 ...

@@ -2,7 +2,7 @@ input {
 	kafka {
 		topics => "beats"
 		auto_commit_interval_ms => "1000"
-		bootstrap_servers => "{{ kafka_host }}:{{ kafka_port }}"
+		bootstrap_servers => "{{ kafka.host }}:{{ kafka.port }}"
 		client_id => "logstash"
 		group_id  => "logstash"
 		codec => "plain"
@@ -45,7 +45,9 @@ filter {
 
 output {
 	elasticsearch {
-    	hosts => ["{{ es_host }}:{{ es_port }}"]
+    	hosts => ["{{ es.host }}:{{ es.port }}"]
+        user => "{{ es.user }}"
+        password => "{{ es.password }}"
         index => "logstash-%{type}-%{+YYYY.MM.dd}"
         flush_size => 20000
         idle_flush_time => 10

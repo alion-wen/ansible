@@ -32,11 +32,9 @@
        src: "patterns/"
        dest: "{{ confdir }}/patterns"
 
- - block:
-    - debug:
-       msg: "Setup Logstash Auto Start"
-    - command: "systemctl enable logstash"
-       
-
-
+ - name: "Setup Logstash Auto Start"
+   service:
+    name: "logstash" 
+    state: "restarted"    
+    enabled: yes
 ...

@@ -1,4 +1,9 @@
 ---
+ - name: Import Secret Vars
+   include_vars: "{{ item }}"
+   with_items:
+    - "secret.yml"
+
  - name: Install Curator
    pip:
     name: "elasticsearch-curator"
@@ -33,7 +38,7 @@
     user: root
     job: "{{ item.job }}"
    with_items:
-    - { name: 'ELK Auto Create Snapshot Every Day', job: '/usr/bin/curator /etc/curator/snapshot.yml' }
-    - { name: 'ELK Auto Delete Snapshot Every Day', job: '/usr/bin/curator /etc/curator/delete_snapshots.yml' }
-    - { name: 'ELK Auto Delete Indices Every Day', job: '/usr/bin/curator /etc/curator/delete_indices.yml' }
+    - { name: 'ELK Auto Create Snapshot Every Day', job: '/usr/bin/curator /etc/curator/actions/snapshot.yml' }
+    - { name: 'ELK Auto Delete Snapshot Every Day', job: '/usr/bin/curator /etc/curator/actions/delete_snapshots.yml' }
+    - { name: 'ELK Auto Delete Indices Every Day', job: '/usr/bin/curator /etc/curator/actions/delete_indices.yml' }
 ...
