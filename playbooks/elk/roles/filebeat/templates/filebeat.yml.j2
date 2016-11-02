@@ -39,7 +39,7 @@ output.redis:
   loadbalance: true
   hosts: [ "{{ redis.host }}" ]
   port: {{ redis.port }}
-  password: "{{ redis.passwd }}"
+  password: "{{ redis.password }}"
   db: 0
   key: beats
   datatype: list #channel
