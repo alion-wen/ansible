@@ -29,8 +29,8 @@
 
  - name: Chmod /etc/rc.d/rc.local
    file: 
-    path: /etc/rc.d/rc.local
-    mode: "u+x"
+    path: '/etc/rc.d/rc.local'
+    mode: "u+rwx"
     state: file
 
  - name: Set System Command's Subcommand Automatic Completion
