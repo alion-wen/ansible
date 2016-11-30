@@ -4,15 +4,16 @@
    with_items:
     - "secret.yml"
 
- - name: Get Mysql RPM 
-   uri:
-    url: "{{ mysql_package_url }}"
-    dest: "{{ tempdir }}/{{ package_name }}"
-    creates: "{{ tempdir }}/{{ package_name }}"
+# - name: Get Mysql RPM 
+#   uri:
+#    url: "{{ mysql_package_url }}"
+#    dest: "{{ tempdir }}/{{ package_name }}"
+#    creates: "{{ tempdir }}/{{ package_name }}"
 
  - name: Install Mysql
    yum:
-    name: "{{ tempdir }}/{{ package_name }}"
+#    name: "{{ tempdir }}/{{ package_name }}"
+    name: "{{ mysql_package_url }}"
     state: present
 
 

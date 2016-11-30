@@ -4,10 +4,6 @@
    yum: 
     name: "{{ item }}"
     state: present
-   register: result
-   until: result.rc ==  1 or result.rc == 0
-   retries: 3
-   delay: 1
    with_items: 
     - ntp 
     - vim-enhanced
@@ -27,6 +23,10 @@
     - libffi-devel
     - deltarpm
     - bash-completion
+   register: result
+   retries: 3
+   delay: 1
+   until: result.rc ==  1 or result.rc == 0
 
  - name: Install Tools Software
    yum: 
