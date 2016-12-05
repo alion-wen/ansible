@@ -73,6 +73,7 @@
     - python-httplib2
     - python34
     - python34-devel
+    - python-devel
 
  - name: Install Perl Software
    yum: 

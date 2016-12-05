@@ -1,4 +1,10 @@
 ---
+ - hosts: lnmp
+   roles:
+    - nginx
+    - php
+    - mysql
+
  - hosts: nginx
    roles:
     - nginx
@@ -10,4 +16,8 @@
  - hosts: mysql
    roles:
     - mysql
+
+ - hosts: percona_tools
+   roles:
+    - percona_tools
 ...

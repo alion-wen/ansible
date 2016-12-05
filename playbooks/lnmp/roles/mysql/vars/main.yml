@@ -1,9 +1,8 @@
 ---
 name: "mysql"
 version: "-5.6.29-1"
-package_name: "{{ name }}{{ version }}.centos7.{{ ansible_architecture }}.rpm"
+package_name: "{{ name }}{{ version }}.centos{{ ansible_distribution_major_version }}.{{ ansible_architecture }}.rpm"
 mysql_package_url: "{{ package_url_prefix }}/mysql/{{ package_name }}"
-tools_package_url: ["{{ package_url_prefix }}/mysql/percona-toolkit-2.2.17-1.noarch.rpm", "{{ package_url_prefix }}/mysql/percona-xtrabackup-24-2.4.2-1.el7.x86_64.rpm"]
 mysql_user: mysql
 mysql_port: 3306
 mysql_install_dir: /usr/local/webserver/mysql

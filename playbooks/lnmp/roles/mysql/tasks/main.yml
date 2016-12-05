@@ -17,11 +17,11 @@
     state: present
 
 
- - name: Install Mysql Tools
-   yum:
-    name: "{{ item }}"
-    state: present
-   with_items: "{{ tools_package_url }}"
+# - name: Install Mysql Tools
+#   yum:
+#    name: "{{ item }}"
+#    state: present
+#   with_items: "{{ tools_package_url }}"
 
  - name: Add Mysql Libs Configuration
    template:
@@ -31,7 +31,7 @@
  - name: Ldconfig
    shell: ldconfig
 
- - name: Export PATH
+ - name: Set Environment PATH
    shell: echo "export PATH={{ mysql_install_dir }}/bin:\$PATH" >> /root/.bash_profile
 
  - block:

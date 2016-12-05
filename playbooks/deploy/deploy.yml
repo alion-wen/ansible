@@ -1,0 +1,18 @@
+---
+ - hosts: html
+   roles:
+    - nginx
+    - php
+    - mysql
+
+ - hosts: php
+   roles:
+    - nginx
+    - php
+    - mysql
+
+ - hosts: proxy
+   roles:
+    - nginx
+    - php
+    - mysql

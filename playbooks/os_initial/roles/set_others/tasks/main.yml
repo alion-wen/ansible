@@ -17,6 +17,15 @@
     enabled: no
    when: ansible_distribution_major_version == "7"
 
+ - name: Chmod /etc/rc.d/rc.local
+   file: 
+    path: '/etc/rc.d/rc.local'
+    mode: "u+rwx"
+    state: file
+
+ - name: Set System Command's Subcommand Automatic Completion
+   shell: "source /usr/share/bash-completion/bash_completion"
+
  - block: 
     - debug:
        msg: "Alter PYPI Source"
@@ -27,14 +36,10 @@
        src: "pip.conf"
        dest: "~/.pip/pip.conf"
 
- - name: Chmod /etc/rc.d/rc.local
-   file: 
-    path: '/etc/rc.d/rc.local'
-    mode: "u+rwx"
-    state: file
-
- - name: Set System Command's Subcommand Automatic Completion
-   shell: "source /usr/share/bash-completion/bash_completion"
+ - name: Update Pip
+   pip:
+    name: "pip"
+    state: latest 
 
  - name: Update Kernel
    yum:
