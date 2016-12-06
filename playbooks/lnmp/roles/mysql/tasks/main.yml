@@ -39,9 +39,10 @@
        msg: Initail Mysql Data Directory
     - file:
        path: "{{ mysql_datadir }}/{{ mysql_port }}/{{ item }}"
-       state: directory
        owner: "{{ mysql_user }}"
        group: "{{ mysql_user }}"
+       recurse: yes
+       state: directory
       with_items:
        - data
        - logs/binlog

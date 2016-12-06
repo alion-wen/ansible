@@ -23,6 +23,9 @@
  - name: Generate Logs Directory
    file:
     path: "{{ php_logs_dir }}"
+    owner: "{{ php_user }}"
+    group: "{{ php_user }}"
+    recurse: yes
     state: directory
 
  - name: Start Daemon When System Boot

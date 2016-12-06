@@ -34,7 +34,7 @@
  - name: Create Zabbix Monitor Logs Directory
    file:
     path: "/data0/logs/zabbix_agent"
-    recursively: yes
+    recurse: yes
     state: directory
 
  - name: Checkout Zabbix_agentd.d
