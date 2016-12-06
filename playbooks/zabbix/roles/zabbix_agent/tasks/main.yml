@@ -23,13 +23,19 @@
 
  - name: Copy Zabbix_agent.conf
    template: 
-    src: zabbix_agentd.conf.{{ Mode }}.j2 
-    dest: /etc/zabbix/zabbix_agentd.conf
+    src: "zabbix_agentd.conf.{{ Mode }}.j2" 
+    dest: "/etc/zabbix/zabbix_agentd.conf"
 
  - name: Delete Old Zabbix_agentd.d Directory
    file:
-    path: /etc/zabbix/zabbix_agentd.d
+    path: "/etc/zabbix/zabbix_agentd.d"
     state: absent
+
+ - name: Create Zabbix Monitor Logs Directory
+   file:
+    path: "/data0/logs/zabbix_agent"
+    recursively: yes
+    state: directory
 
  - name: Checkout Zabbix_agentd.d
    subversion:
