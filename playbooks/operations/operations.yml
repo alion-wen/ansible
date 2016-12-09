@@ -7,13 +7,13 @@
 #   roles:
 #    - reload_php
 
-# - hosts: zabbix_agent
-#   roles:
-#    - reload_zabbix_agent
-
- - hosts: zabbix_server
+ - hosts: zabbix_agent
    roles:
-    - reload_zabbix_server
+    - reload_zabbix_agent
+
+# - hosts: zabbix_server
+#   roles:
+#    - reload_zabbix_server
 
 # - hosts: logstash
 #   roles:

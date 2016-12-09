@@ -2,15 +2,8 @@
 
 [nginx]
 
-[nginx:children]
-lnmp
-
 [php]
-
-[php:children]
-lnmp
 
 [mysql]
 
-[mysql:children]
-lnmp
+[percona_tools]
