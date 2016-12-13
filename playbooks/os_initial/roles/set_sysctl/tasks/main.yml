@@ -26,6 +26,6 @@
     - {name: net.ipv4.tcp_keepalive_time, value: 1200}
     - {name: net.ipv4.tcp_mem, value: 94500000 915000000 927000000}
     - {name: net.ipv4.tcp_max_orphans, value: 3276800}
-    - {name: net.ipv4.ip_local_port_range, value: 1024 65000}
+    - {name: net.ipv4.ip_local_port_range, value: 10000 65000}
     - {name: vm.swappiness, value: 0}
 ...
