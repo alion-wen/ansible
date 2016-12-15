@@ -68,11 +68,12 @@
     name: "{{ item }}"
     state: present
    with_items: 
-    - python-pip
+    - python2-pip
     - python-simplejson
     - python-httplib2
     - python34
     - python34-devel
+    - python34-pip
     - python-devel
 
  - name: Install Perl Software
