@@ -23,8 +23,17 @@
        src: default.htpasswd
        dest: "{{ nginx_install_dir }}/conf/setup/auth/htpasswd/"
 
+ - name: Link Nginx Directory
+   file:
+    src: "{{ nginx_install_dir }}"
+    path: "{{ nginx_link_dir }}"
+    state: link
+
+ - name: Protection Nginx Is Not Updated
+   shell: echo "exclude=nginx*" >> /etc/yum.conf
+
  - name: Start Daemon When System Boot
-   shell: echo "{{ nginx_install_dir }}/sbin/nginx" >> /etc/rc.local
+   shell: echo "{{ nginx_link_dir }}/sbin/nginx" >> /etc/rc.local
 
  - name: Create Logs Dir
    file:
@@ -40,6 +49,6 @@
     dest: /etc/logrotate.d/nginx
 
  - name: Set Environment PATH 
-   shell: echo "export PATH={{ nginx_install_dir }}/sbin:\$PATH" >> /root/.bash_profile
+   shell: echo "export PATH={{ nginx_link_dir }}/sbin:\$PATH" >> /root/.bash_profile
 
 ...

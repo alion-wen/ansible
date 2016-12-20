@@ -23,12 +23,12 @@
     mode: "u+rwx"
     state: file
 
- - name: Set System Command's Subcommand Automatic Completion
-   shell: "source /usr/share/bash-completion/bash_completion"
+# - name: Set System Command's Subcommand Automatic Completion
+#   shell: "source /usr/share/bash-completion/bash_completion"
 
  - block: 
     - debug:
-       msg: "Alter PYPI Source"
+       msg: "Change PYPI Source"
     - file:
        path: "~/.pip"
        state: directory
