@@ -26,4 +26,8 @@
  - hosts: delete_mysql_user
    roles:
     - delete_mysql_user
+
+ - hosts: add_mysql_slave
+   roles:
+    - add_mysql_slave
 ...

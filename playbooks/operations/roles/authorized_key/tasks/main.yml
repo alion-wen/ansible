@@ -1,4 +1,9 @@
 ---
+ - name: Import Secret Vars
+   include_vars: "{{ item }}"
+   with_items:
+    - "secret.yml"
+
  - name: Add Authorized_keys
    authorized_key:
     key: "{{ lookup('file', '{{ item }}.pub') }}"
