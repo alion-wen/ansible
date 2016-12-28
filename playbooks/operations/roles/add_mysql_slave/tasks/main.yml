@@ -8,9 +8,15 @@
     use_regex: yes
    register: pathglob
 
- - name: 设置端口号
+ - name: 设置实例默认端口号
    set_fact:
-    port: "{{ pathglob.files[-1].path|basename|int + 1 }}"
+    port: 3307
+   when: pathglob.files == []
+
+ - name: 设置实例端口号
+   set_fact:
+    port: "{{ pathglob.files[-1].path|basename|int + 1|default(3307) }}"
+   when: pathglob.files != []
 
  - name: 创建实例目录
    file:
