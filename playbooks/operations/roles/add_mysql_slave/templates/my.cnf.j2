@@ -38,7 +38,7 @@ interactive_timeout                 = 31536000
 wait_timeout                            = 31536000
 
 ### Binlog ###
-server_id                                   = 2
+server_id                                   = {{ 100000|random }}
 sync_binlog                              =10
 binlog_format                         = MIXED
 expire_logs_days                      = 14
