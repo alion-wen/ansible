@@ -3,7 +3,7 @@
 
 #elasticsearch install info
 name: "elasticsearch"
-version: "5.0.0"
+version: "5.2.0"
 suffix: "tar.gz"
 fullname: "{{ name }}-{{ version }}.{{ suffix }}"
 package_url: "{{ url_prefix }}/{{ fullname }}"

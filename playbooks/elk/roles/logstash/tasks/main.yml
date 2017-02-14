@@ -29,8 +29,8 @@
       with_items:
        - "conf.d/redis.conf"
     - synchronize:
-       src: "patterns/"
-       dest: "{{ confdir }}/patterns"
+       src: "./"
+       dest: "{{ confdir }}"
 
  - name: "Setup Logstash Auto Start"
    service:

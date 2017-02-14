@@ -56,8 +56,8 @@ filter {
 output {
     elasticsearch {
         hosts => ["{{ es.host }}:{{ es.port }}"]
-        user => "{{ es.user }}"
-        password => "{{ es.password }}"
+        #user => "{{ es.user }}"
+        #password => "{{ es.password }}"
         index => "logstash-%{type}-%{+YYYY.MM.dd}"
         flush_size => 20000
         idle_flush_time => 10
