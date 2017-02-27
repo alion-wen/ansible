@@ -5,9 +5,9 @@
 
  - hosts: all
    roles:
-    - role: set_sysctl
-    - role: set_repo
+    #- role: set_repo
     - role: install_base_soft
+    - role: set_sysctl
     - role: set_time
     - role: set_sshd
     - role: add_users
