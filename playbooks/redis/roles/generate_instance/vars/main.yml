@@ -1,3 +1,3 @@
 ---
 redis_instance_dir: "/data0/redis"
-redis_password: "{{ ansible_machine_id|b64encode }}"
+redis_password: "{{ ansible_machine_id|hash('md5') }}"
