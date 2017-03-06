@@ -1,2 +1,3 @@
 ---
-build_dir: /tmp
+build_dir: "/tmp"
+redis_link_dir: "/usr/local/webserver/redis"

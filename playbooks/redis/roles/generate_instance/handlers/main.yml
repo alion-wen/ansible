@@ -1,0 +1,4 @@
+---
+ - name: Start Redis
+   command: "{{ redis_instance_dir }}/{{ redis_port }}/redisd start"
+...

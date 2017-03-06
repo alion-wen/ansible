@@ -1,0 +1,69 @@
+#!/bin/bash
+# chkconfig: 2345 50 30
+#
+# description: Redis service
+#
+#Script:Redis command
+ 
+Redisserver={{ redis_link_dir }}/bin/redis-server
+Rediscli={{ redis_link_dir }}/bin/redis-cli
+Redisconf={{ redis_instance_dir }}/{{ redis_port }}/redis.conf
+Redismanage={{ redis_instance_dir }}/{{ redis_port }}/redisd
+Redisport={{ redis_port }}
+Redispassword="{{ redis_password }}"
+
+ 
+function_start()
+{
+    printf "start redis-server..."
+    $Redisserver $Redisconf &>/dev/null  & 
+    if [ $? -eq 0 ];then
+        echo "runing"
+    fi
+}
+ 
+function_stop()
+{
+    printf "stop redis-server..."
+    $Rediscli -p $Redisport -a "$Redispassword" shutdown
+    if [ $? -eq 0 ];then
+        echo "stop"
+    fi
+}
+ 
+function_restart()
+{
+    function_start
+    function_stop
+}
+ 
+function_status()
+{
+    $Rediscli -p $Redisport -a "$Redispassword" ping &>/dev/null & 
+    if [ $? -eq 0 ];then
+        echo -e "The Redis is [\e[0;32;5m runing \e[0m]"
+    else
+        echo -e "The Redis is [\e[0;31;5m not run \e[0m]"
+    fi
+}
+ 
+case "$1" in
+        start)
+                function_start
+                ;;
+        stop)
+                function_stop
+                ;;
+        restart)
+                function_stop
+                function_start
+                ;;
+        status)
+                function_status
+                ;;
+              *)
+              echo "Usage: $Redismanage {start|stop|restart|status}"
+             
+esac
+ 
+exit

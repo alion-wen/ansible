@@ -1,0 +1,44 @@
+---
+ - block: 
+    - debug:
+       msg: Create Instance Data Directory
+    - file:
+       path: "{{ redis_instance_dir }}"
+       state: directory
+    - find:
+       paths: 
+        - "{{ redis_instance_dir }}"
+       file_type: directory
+       patterns: "*"
+       #use_regex: True
+      register: instance_list
+    - shell: echo "{{ instance_list }}" > /tmp/a
+    - set_fact:
+       redis_port: 6379
+      when: instance_list.matched == 0
+    - set_fact:
+       redis_port: "{{ instance_list.files[-1].path|basename|int + 1 }}"
+      when: instance_list.matched != 0
+    - file:
+       path: "{{ item }}"
+       state: directory
+      with_items:
+       - "{{ redis_instance_dir }}/{{ redis_port }}/data"
+       - "{{ redis_instance_dir }}/{{ redis_port }}/logs"
+
+ - name: Copy Configure And Manage Script
+   template:
+    src: "{{ item.filename }}.j2"
+    dest: "{{ redis_instance_dir }}/{{ redis_port }}/{{ item.filename }}"
+    mode: "{{ item.mode }}"
+   with_items:
+    - { 'filename': 'redis.conf', 'mode': '0644' } 
+    - { 'filename': 'redisd', 'mode': '0700' } 
+   notify:
+    - Start Redis
+
+ - name: Set Automatic Boot
+   blockinfile:
+    dest: "/etc/rc.local"
+    block: "{{ redis_instance_dir }}/{{ redis_port }}/redisd start"
+...
