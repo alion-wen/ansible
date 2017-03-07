@@ -1,7 +1,0 @@
----
- - name: Input Domain Infomation
-   vars_prompt:
-    - name: "master_domain"
-      prompt: "#输入一个主域名,例如 www.baidu.com\n "
-    - name: "slave_doamin"
-      prompt: ""
