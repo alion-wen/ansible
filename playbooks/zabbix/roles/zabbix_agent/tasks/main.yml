@@ -9,17 +9,10 @@
     name: unixODBC 
     state: present
 
- - name: Install Zabbix-agentd On CentOS 7
+ - name: Install Zabbix-agentd On CentOS
    yum: 
     name: "{{ Zabbix_Agent_Package }}"
     state: present
-   when: "ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'"
-
- - name: Install Zabbix-agentd On CentOS 6
-   yum: 
-    name: "{{ Zabbix_Agent_Package }}"
-    state: present
-   when: "ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'"
 
  - name: Copy Zabbix_agent.conf
    template: 
@@ -38,12 +31,10 @@
     state: directory
 
  - name: Checkout Zabbix_agentd.d
-   subversion:
-    repo: "{{ SVN_ADDR }}"
-    username: "{{ SVN_USER }}"
-    password: "{{ SVN_PASSWD }}"
-    dest: /etc/zabbix/zabbix_agentd.d
-    force: yes
+   git:
+    repo: "{{ Monitor_Template_Repo }}"
+    dest: "/etc/zabbix/zabbix_agentd.d"
+    clone: yes
    notify:
     - Restart Zabbix-agentd
 ...
