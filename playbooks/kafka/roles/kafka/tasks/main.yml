@@ -37,7 +37,9 @@
       with_items:
        - "kafka.service"
        - "zookeeper.service"
-    - shell: "systemctl enable kafka && systemctl enable zookeeper"
+      notify:
+       - Restart Kafka
+       - Restart Zookeeper
        
 
 

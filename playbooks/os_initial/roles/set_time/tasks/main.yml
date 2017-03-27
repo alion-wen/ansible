@@ -1,13 +1,9 @@
 ---
- - name: Set CentOS 7 Timezone
-   shell: timedatectl set-timezone Asia/Shanghai
-   when: ansible_distribution_major_version == '7'
-
- - name: Set CentOS 6 Timezone
-   copy: 
-    src: timezone.Shanghai 
-    dest: /etc/localtime
-   when: ansible_distribution_major_version != '7'
+ - name: Set Timezone
+   timezone:
+    name: Asia/Shanghai
+   notify:
+    - Restart Crond
 
  - name: Close Ntpd Service
    service:

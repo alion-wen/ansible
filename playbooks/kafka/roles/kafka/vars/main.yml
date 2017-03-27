@@ -5,3 +5,5 @@ suffix: "tgz"
 fullname: "{{ name }}_{{ version }}.{{ suffix }}"
 package_url: "{{ url_prefix }}/{{ name }}/{{ fullname }}"
 basedir: "/usr/local/webserver/{{ name }}"
+zk_host: "127.0.0.1"
+zk_port: 2181

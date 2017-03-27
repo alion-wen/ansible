@@ -3,6 +3,8 @@
    copy: 
     src: sshd_config_{{ ansible_distribution_major_version }}
     dest: /etc/ssh/sshd_config
+   notify:
+    - Restart Sshd
 
  - name: Add Authorized_keys
    authorized_key: 
