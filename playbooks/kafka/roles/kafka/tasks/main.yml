@@ -35,12 +35,13 @@
         src: "{{ item }}.j2"
         dest: "/etc/systemd/system/{{ item }}"
       with_items:
-       - "kafka.service"
        - "zookeeper.service"
-      notify:
-       - Restart Kafka
-       - Restart Zookeeper
-       
-
-
+       - "kafka.service"
+    - service:
+       name: {{ item }}
+       state: restarted
+       enabled: yes
+      with_items:
+       - "zookeeper"
+       - "kafka"
 ...
