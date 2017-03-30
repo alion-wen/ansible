@@ -12,7 +12,6 @@
        patterns: "*"
        #use_regex: True
       register: instance_list
-    - shell: echo "{{ instance_list }}" > /tmp/a
     - set_fact:
        redis_port: 6379
       when: instance_list.matched == 0
@@ -41,4 +40,8 @@
    blockinfile:
     dest: "/etc/rc.local"
     block: "{{ redis_instance_dir }}/{{ redis_port }}/redisd start"
+
+ - name: Echo Password
+   debug:
+    msg: "password of instance {{ redis_port }} is {{ redis_password }} "
 ...
