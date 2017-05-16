@@ -4,20 +4,9 @@
    with_items:
     - "secret.yml"
 
- - name: Download Filebeat Package
-   uri:
-    url: "{{ package_url }}"
-    dest: "{{ tempdir }}"
-    creates: "{{ tempdir }}/{{ name }}"
-
- - name: Uninstall Filebeat
-   yum: 
-    name: "filebeat"
-    state: absent
-
  - name: Install Filebeat
    yum: 
-    name: "{{ tempdir }}/{{ name }}"
+    name: "{{ package_url }}"
     state: present
 
  - name: Copy Templates

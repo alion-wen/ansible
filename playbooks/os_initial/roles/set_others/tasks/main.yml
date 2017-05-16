@@ -23,6 +23,11 @@
     mode: "u+rwx"
     state: file
 
+ - name: Enable rc-local service
+   service:
+    name: rc-local
+    enabled: yes
+
  - block: 
     - debug:
        msg: "Change PYPI Source"
@@ -45,5 +50,5 @@
 
  - name: Reboot System
    command: init 6
-   ignore_errors: True
-
+   async: 120
+   poll: 5
