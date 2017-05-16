@@ -1,0 +1,14 @@
+---
+ - name: Copy Docker.repo
+   copy: 
+    src: docker.repo 
+    dest: /etc/yum.repos.d/docker.repo
+
+ - name: Yum Install Docker-ce
+   yum: 
+    name: docker-ce
+    state: present 
+    update_cache: yes
+   notify: 
+    - Restart Docker-ce
+...
