@@ -7,7 +7,7 @@
  - name: Install Nginx
    yum:
     name: "{{ nginx_package_url }}"
-    state: installed
+    state: present
  
  - block:
     - debug:
@@ -29,11 +29,10 @@
     path: "{{ nginx_link_dir }}"
     state: link
 
- - name: Protection Nginx Is Not Updated
-   shell: echo "exclude=nginx*" >> /etc/yum.conf
-
  - name: Start Daemon When System Boot
-   shell: echo "{{ nginx_link_dir }}/sbin/nginx" >> /etc/rc.local
+   blockinfile:
+    block: "{{ nginx_link_dir }}/sbin/nginx"
+    dest: /etc/rc.d/rc.local
 
  - name: Create Logs Dir
    file:
@@ -49,6 +48,8 @@
     dest: /etc/logrotate.d/nginx
 
  - name: Set Environment PATH 
-   shell: echo "export PATH={{ nginx_link_dir }}/sbin:\$PATH" >> /root/.bash_profile
+   blockinfile:
+    block: "export PATH={{ nginx_link_dir }}/sbin:$PATH"
+    dest: /root/.bash_profile
 
 ...
