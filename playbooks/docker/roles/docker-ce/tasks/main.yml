@@ -1,8 +1,9 @@
 ---
- - name: Copy Docker.repo
-   copy: 
-    src: docker.repo 
-    dest: /etc/yum.repos.d/docker.repo
+ - name: Download Docker.repo
+   uri:
+    url: "https://download.docker.com/linux/centos/docker-ce.repo"
+    dest: /etc/yum.repos.d/docker-ce.repo
+    creates: /etc/yum.repos.d/docker-ce.repo
 
  - name: Yum Install Docker-ce
    yum: 
