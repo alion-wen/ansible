@@ -38,7 +38,8 @@
 
  - name: Set Automatic Boot
    blockinfile:
-    dest: "/etc/rc.local"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR REDIS OF PORT {{ redis_port }}"
+    dest: "/etc/rc.d/rc.local"
     block: "{{ redis_instance_dir }}/{{ redis_port }}/redisd start"
 
  - name: Echo Password

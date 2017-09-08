@@ -31,6 +31,7 @@
 
  - name: Start Daemon When System Boot
    blockinfile:
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR NGINX"
     block: "{{ nginx_link_dir }}/sbin/nginx"
     dest: /etc/rc.d/rc.local
 
@@ -49,6 +50,7 @@
 
  - name: Set Environment PATH 
    blockinfile:
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR NGINX"
     block: "export PATH={{ nginx_link_dir }}/sbin:$PATH"
     dest: /root/.bash_profile
 

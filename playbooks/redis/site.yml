@@ -1,6 +1,5 @@
 ---
  - hosts: redis
    roles:
-#    - role: install_server
-    - role: generate_instance
+    - role: install_server
 ...

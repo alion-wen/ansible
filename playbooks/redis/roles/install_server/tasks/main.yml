@@ -35,6 +35,11 @@
  
  - name: Export PATH
    blockinfile:
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR REDIS"
     dest: "/root/.bash_profile"
     block: "export PATH={{ redis_link_dir }}/bin:$PATH"
+
+ - name: Generate Redis Instance
+   include_role: 
+    name: generate_instance
 ...

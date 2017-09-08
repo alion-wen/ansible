@@ -14,6 +14,12 @@
     name: "{{ Zabbix_Agent_Package }}"
     state: present
 
+ - name: Create Zabbix Monitor Logs Directory
+   file:
+    path: "/data0/logs/zabbix_agent"
+    recurse: yes
+    state: directory
+
  - name: Copy Zabbix_agent.conf
    template: 
     src: "zabbix_agentd.conf.{{ Mode }}.j2" 
@@ -23,12 +29,6 @@
    file:
     path: "/etc/zabbix/zabbix_agentd.d"
     state: absent
-
- - name: Create Zabbix Monitor Logs Directory
-   file:
-    path: "/data0/logs/zabbix_agent"
-    recurse: yes
-    state: directory
 
  - name: Checkout Zabbix_agentd.d
    git:

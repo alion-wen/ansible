@@ -30,11 +30,13 @@
 
  - name: Start Daemon When System Boot
    blockinfile: 
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR PHP"
     block: "{{ php_install_dir }}/sbin/php-fpm"
     dest: /etc/rc.d/rc.local       
 
  - name: Set Environment PATH
    blockinfile:
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR PHP"
     block: "export PATH={{ php_install_dir }}/bin:$PATH"
     dest: /etc/.bash_profile
 

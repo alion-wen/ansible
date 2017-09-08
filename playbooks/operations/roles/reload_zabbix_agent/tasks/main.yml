@@ -3,10 +3,7 @@
    include_vars: "{{ item }}"
    with_items:
     - "secret.yml"
-# - name: Delete Configuration When Repos UUID Is Different
-#   file:
-#    path: /etc/zabbix/zabbix_agentd.d
-#    state: absent
+
  - name: Svn Update Zabbix-agent Configuration
    subversion:
     repo: "{{ SVN_ADDR }}"
