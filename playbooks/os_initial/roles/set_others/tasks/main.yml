@@ -49,6 +49,26 @@
     state: latest 
 
  - name: Reboot System
-   command: init 6
-   async: 120
-   poll: 5
+   #command: init 6
+   command: /sbin/shutdown -r +1
+   async: 0
+   poll: 0
+   #ignore_errors: true
+
+   # - name: Wait_for Reboot
+   #wait_for_connection:
+   # delay: 60
+   # sleep: 5
+   # timeout: 300
+   # state: started
+
+ - name: Wait_for Reboot
+   wait_for:
+    port: 22
+    host: "{{ansible_ssh_host|default(inventory_hostname)}}"
+    delay: 10
+    sleep: 5
+    timeout: 300
+    state: started
+   connection: local
+
