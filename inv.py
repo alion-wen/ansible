@@ -1,4 +1,4 @@
 #!/usr/bin/env python
 import json
-a = { 'b': ['127.0.0.1'] }
+a = { 'consul': ['192.168.1.111'] }
 print(json.dumps(a))
