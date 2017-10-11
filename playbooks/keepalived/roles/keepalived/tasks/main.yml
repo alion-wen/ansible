@@ -1,0 +1,9 @@
+---
+ - name: Installing Keepalived
+   yum:
+    name: keepalived
+    state: present
+
+ - name: Generate Configure File
+   template:
+

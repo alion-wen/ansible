@@ -22,7 +22,7 @@
 
  - name: Copy Zabbix_agent.conf
    template: 
-    src: "zabbix_agentd.conf.{{ Mode }}.j2" 
+    src: "zabbix_agentd.conf.j2" 
     dest: "/etc/zabbix/zabbix_agentd.conf"
 
  - name: Delete Old Zabbix_agentd.d Directory

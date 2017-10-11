@@ -91,7 +91,8 @@ class OssAuth(object):
         args = self.verb.upper() + '\n\n\n' + self.datetime + '\n/' + urlparse(self.url).netloc.split('.')[0] + urlparse(self.url).path
         h = hmac.new(self.secret_key, args, hashlib.sha1)
         signature = base64.b64encode(h.digest())
-        return self.service.upper() + ' ' + self.key_id + ':' + signature, self.datetime
+        authorization = self.service.upper() + ' ' + self.key_id + ':' + signature
+        return authorization, self.datetime
 
 
 
@@ -112,8 +113,6 @@ def main():
         supports_check_mode = True
     )
 
-    print module.params['key_id']
-    print module.params['secret_key']
     if module.check_mode:
         return result
 

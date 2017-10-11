@@ -1,0 +1,43 @@
+---
+ - name: Import Secret Vars
+   include_vars: "{{ item }}"
+   with_items:
+    - "secret.yml"
+
+ - name: Get Aliyun Authorization
+   ali_auth:
+    service: "OSS"
+    key_id: "{{ key_id }}"
+    secret_key: "{{ secret_key }}"
+    verb: "GET"
+    url: "{{ download_addr }}"
+   register: info
+
+ - name: Download Consul Binary Package
+   uri:
+    method: "GET" 
+    url: "{{ download_addr }}"
+    headers: 
+     Authorization: "{{ info.authorization }}"
+     Date: "{{ info.date }}"
+    dest: "{{ temp_path }}/{{ name }}.zip"
+    creates: "{{temp_path}}/{{ name }}.zip"
+
+ - name: Create Consul Install directory
+   file:
+    path:  "{{ install_path }}"
+    state: directory
+
+ - name: Installing Consul
+   unarchive:
+    src: "{{ temp_path }}/{{ name }}.zip"
+    dest: "{{ install_path }}"
+    copy: no
+    creates: "{{ install_path }}/{{ name }}"
+
+ - name: Create Consul Command symlinks
+   file:
+    src: "{{ install_path }}/{{ name }}"
+    dest: "/usr/bin/{{ name }}"
+    force: yes
+    state: link
