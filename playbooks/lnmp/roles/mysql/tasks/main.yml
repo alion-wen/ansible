@@ -4,6 +4,11 @@
    with_items:
     - "secret.yml"
 
+ - name: Installing Mysql
+   yum:
+    name: "{{ mysql_package_url }}"
+    state: present
+
  - name: Add Mysql Libs Configuration
    template:
     src: "lib_mysql.conf.j2"
@@ -16,7 +21,7 @@
    blockinfile: 
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR MYSQL"
     block: "export PATH={{ mysql_install_dir }}/bin:$PATH"
-    dest: /root/.bash_profile
+    dest: /etc/profile
 
  - block:
     - debug:

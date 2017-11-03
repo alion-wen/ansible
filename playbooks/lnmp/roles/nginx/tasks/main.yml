@@ -23,16 +23,16 @@
        src: default.htpasswd
        dest: "{{ nginx_install_dir }}/conf/setup/auth/htpasswd/"
 
- - name: Link Nginx Directory
-   file:
-    src: "{{ nginx_install_dir }}"
-    path: "{{ nginx_link_dir }}"
-    state: link
+# - name: Link Nginx Directory
+#   file:
+#    src: "{{ nginx_install_dir }}"
+#    path: "{{ nginx_link_dir }}"
+#    state: link
 
  - name: Start Daemon When System Boot
    blockinfile:
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR NGINX"
-    block: "{{ nginx_link_dir }}/sbin/nginx"
+    block: "{{ nginx_install_dir }}/sbin/nginx"
     dest: /etc/rc.d/rc.local
 
  - name: Create Logs Dir
@@ -51,7 +51,7 @@
  - name: Set Environment PATH 
    blockinfile:
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR NGINX"
-    block: "export PATH={{ nginx_link_dir }}/sbin:$PATH"
-    dest: /root/.bash_profile
+    block: "export PATH={{ nginx_install_dir }}/sbin:$PATH"
+    dest: /etc/profile
 
 ...

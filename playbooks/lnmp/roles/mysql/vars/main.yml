@@ -1,8 +1,8 @@
 ---
 name: "mysql"
-version: "-5.6.29-1"
-package_name: "{{ name }}{{ version }}.centos{{ ansible_distribution_major_version }}.{{ ansible_architecture }}.rpm"
-mysql_package_url: "{{ package_url_prefix }}/mysql/{{ package_name }}"
+version: "5.7.19-17"
+package_name: "{{ name }}-{{ version }}.el{{ ansible_distribution_major_version }}.{{ ansible_architecture }}.rpm"
+mysql_package_url: "{{ package_url_prefix }}/{{ name }}/{{ package_name }}"
 mysql_user: mysql
 mysql_port: 3306
 mysql_install_dir: /usr/local/webserver/mysql

@@ -35,6 +35,7 @@
     dest: "/etc/systemd/system/{{ item }}"
    with_items:
     - "shadowsocks-client.service"
+   when: install_type == "client"
 
  - name: Start Shadowsocks-client
    service: 

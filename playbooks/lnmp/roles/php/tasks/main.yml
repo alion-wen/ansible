@@ -19,6 +19,10 @@
        repo: "{{ php_conf_url }}"
        dest: "{{ php_install_dir }}/etc"
        clone: yes
+    - copy:
+       src: "{{ php_install_dir }}/etc/default.php.ini"
+       dest: "{{ php_install_dir }}/etc/php.ini"
+       remote_src: yes
 
  - name: Generate Logs Directory
    file:
@@ -38,6 +42,6 @@
    blockinfile:
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR PHP"
     block: "export PATH={{ php_install_dir }}/bin:$PATH"
-    dest: /etc/.bash_profile
+    dest: /etc/profile
 
 ...

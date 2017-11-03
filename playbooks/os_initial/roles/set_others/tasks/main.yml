@@ -3,19 +3,25 @@
    selinux: 
     state: disabled
 
- - name: Close Firewall On Centos 6
+ - name: Disable Firewall On Centos 6
    service: 
     name: iptables
     state: stopped
     enabled: no
    when: ansible_distribution_major_version == "6"
 
- - name: Close Firewall On Centos 7
+ - name: Disable Firewall On Centos 7
    service: 
     name: firewalld
     state: stopped
     enabled: no
    when: ansible_distribution_major_version == "7"
+
+ - name: Disable Postfix
+   service:
+    name: postfix
+    state: stopped
+    enabled: no
 
  - name: Chmod /etc/rc.d/rc.local
    file: 
@@ -49,11 +55,9 @@
     state: latest 
 
  - name: Reboot System
-   #command: init 6
    command: /sbin/shutdown -r +1
    async: 0
    poll: 0
-   #ignore_errors: true
 
    # - name: Wait_for Reboot
    #wait_for_connection:
