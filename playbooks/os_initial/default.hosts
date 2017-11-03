@@ -1,4 +1,5 @@
 [aliyun]
+[vultr]
 [IDC]
 
 [all:vars]

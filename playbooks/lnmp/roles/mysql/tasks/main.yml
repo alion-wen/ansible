@@ -4,6 +4,24 @@
    with_items:
     - "secret.yml"
 
+ - name: Add Mysql User Group
+   group: 
+    name: "{{ mysql_user.name }}" 
+    gid: "{{ mysql_user.id }}" 
+    state: present 
+    system: yes
+
+ - name: Add Mysql User
+   user: 
+    name: "{{ mysql_user.name }}" 
+    group: "{{ mysql_user.name }}" 
+    uid: "{{ mysql_user.id }}" 
+    createhome: no 
+    comment: "{{ mysql_user.comment }}" 
+    shell: /sbin/nologin 
+    state: present 
+    system: yes
+
  - name: Installing Mysql
    yum:
     name: "{{ mysql_package_url }}"
@@ -28,8 +46,8 @@
        msg: Initail Mysql Data Directory
     - file:
        path: "{{ mysql_datadir }}/{{ mysql_port }}/{{ item }}"
-       owner: "{{ mysql_user }}"
-       group: "{{ mysql_user }}"
+       owner: "{{ mysql_user.name }}"
+       group: "{{ mysql_user.name }}"
        recurse: yes
        state: directory
       with_items:
@@ -39,8 +57,8 @@
     - template:
        src: "{{ item.name }}.j2"
        dest: "{{ mysql_datadir }}/{{ mysql_port }}/{{ item.name }}"
-       owner: "{{ mysql_user }}"
-       group: "{{ mysql_user }}"
+       owner: "{{ mysql_user.name }}"
+       group: "{{ mysql_user.name }}"
        mode: "{{ item.mode }}"
       with_items:
        - {name: my.cnf, mode: 600}

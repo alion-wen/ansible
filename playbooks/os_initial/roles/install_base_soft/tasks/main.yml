@@ -93,14 +93,30 @@
     - python2-pip
     - python34-pip
 
- - name: Install Perl Software
-   yum: 
-    name: "{{ item }}" 
-    state: present
-   with_items:
-    - perl-DBI 
-    - perl-DBD-MySQL
-    - perl-Config-Tiny
-    - perl-ExtUtils-MakeMaker
-    - perl-CPAN
+ - block: 
+    - debug:
+       msg: "Change PYPI Source"
+    - file:
+       path: "~/.pip"
+       state: directory
+    - copy:
+       src: "pip.conf"
+       dest: "~/.pip/pip.conf"
+   when: inventory_hostname not in groups["vultr"]
+
+ - name: Update Pip
+   pip:
+    name: "pip"
+    state: latest 
+
+# - name: Install Perl Software
+#   yum: 
+#    name: "{{ item }}" 
+#    state: present
+#   with_items:
+#    - perl-DBI 
+#    - perl-DBD-MySQL
+#    - perl-Config-Tiny
+#    - perl-ExtUtils-MakeMaker
+#    - perl-CPAN
 ...

@@ -1,0 +1,26 @@
+---
+ - name: Close Selinux
+   selinux: 
+    state: disabled
+   when: inventory_hostname not in groups["vultr"]
+
+ - name: Disable Firewall On Centos 6
+   service: 
+    name: iptables
+    state: stopped
+    enabled: no
+   when: ansible_distribution_major_version == "6"
+
+ - name: Disable Firewall On Centos 7
+   service: 
+    name: firewalld
+    state: stopped
+    enabled: no
+   when: ansible_distribution_major_version == "7"
+
+ - name: Disable Postfix
+   service:
+    name: postfix
+    state: stopped
+    enabled: no
+

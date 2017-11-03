@@ -1,6 +1,6 @@
 [mysqld]
 ###### Mysql Global ######
-user    = {{ mysql_user }}
+user    = {{ mysql_user.name }}
 port    = {{ mysql_port }}
 bind_address=0.0.0.0
 socket  = {{ mysql_datadir }}/{{ mysql_port }}/mysql.sock 
