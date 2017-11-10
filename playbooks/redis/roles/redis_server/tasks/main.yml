@@ -7,6 +7,15 @@
     - jemalloc
     - jemalloc-devel
 
+ - name: Modify /etc/sysctl.conf
+   sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: yes
+   with_items:
+    - {name: vm.overcommit_memory, value: 1}
+
  - name: Get Redis Source Code
    uri:
     url: "{{ redis_package_url }}"
@@ -27,17 +36,12 @@
        params:
         NUM_THREADS: "{{ ansible_processor_count }}"
         PREFIX: "{{ redis_install_dir }}"
-    - file:
-       src: "{{ redis_install_dir }}"
-       path: "{{ redis_link_dir }}"
-       state: link
-       force: yes
  
  - name: Export PATH
    blockinfile:
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR REDIS"
     dest: "/root/.bash_profile"
-    block: "export PATH={{ redis_link_dir }}/bin:$PATH"
+    block: "export PATH={{ redis_install_dir }}/bin:$PATH"
 
  - name: Generate Redis Instance
    include_role: 

@@ -1,5 +1,6 @@
 ---
- - hosts: IDC
+ - hosts: 
+    - IDC
    roles:
     - role: set_nameserver
 
