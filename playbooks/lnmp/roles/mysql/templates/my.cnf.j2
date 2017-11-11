@@ -40,6 +40,8 @@ wait_timeout                            = 31536000
 ### Binlog ###
 server_id                                   = 2
 sync_binlog                              =10
+gtid_mode                    = ON
+enforce_gtid_consistency     = ON
 binlog_format                         = ROW
 expire_logs_days                      = 14
 binlog_cache_size                    = 8M
@@ -49,6 +51,7 @@ log_bin = {{ mysql_datadir }}/{{ mysql_port }}/logs/binlog/mysql-bin
 log_bin_index  = {{ mysql_datadir }}/{{ mysql_port }}/logs/binlog/mysql-bin.index
 
 ###  Slave  ###
+#read_only                   = 1
 auto_increment_offset             = 1
 auto_increment_increment     = 1
 log_slave_updates                    = 1      
