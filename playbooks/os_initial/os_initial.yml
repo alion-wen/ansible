@@ -10,9 +10,11 @@
    roles:
     - role: set_repo
     - role: install_base_soft
+    - role: set_hostname
     - role: set_sysctl
     - role: set_time
     - role: set_sshd
+    - role: set_passwd
     - role: set_limits
     - role: set_rclocal
     - role: disable_service

@@ -1,0 +1,12 @@
+gogs_name: 'gogs'
+gogs_version: '0.11.29'
+gogs_compress_format: 'tar.gz'
+gogs_url: 'http://7d9nal.com2.z0.glb.qiniucdn.com/{{ gogs_version }}/linux_amd64.{{ gogs_compress_format }}'
+gogs_pkg_name: '{{ gogs_name }}_{{ gogs_version }}.{{ gogs_compress_format }}'
+gogs_install_path: '/usr/local/webserver'
+gogs_data_dir: '/data0/gogs'
+gogs_logs_dir: '/data0/logs/gogs'
+git_user:
+ name: 'git'
+ id: 305
+ comment: 'Git Server'

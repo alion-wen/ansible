@@ -2,7 +2,7 @@
  - name: Chmod /etc/rc.d/rc.local
    file: 
     path: '/etc/rc.d/rc.local'
-    mode: "u+rwx"
+    mode: u+rwx
     state: file
 
  - name: Enable rc-local service

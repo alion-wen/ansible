@@ -92,6 +92,7 @@
    with_items: 
     - python2-pip
     - python34-pip
+    - firewalld
 
  - block: 
     - debug:

@@ -3,15 +3,7 @@
    yum:
     name: "*"
     state: latest 
-
- - name: Reboot System
-   command: /sbin/shutdown -r +1
-   async: 0
-   poll: 0
-
- - name: Wait_for Reboot
-   wait_for_connection:
-    delay: 10
-    sleep: 5
-    timeout: 300
+   notify:
+    - Reboot
+    - Wait
 
