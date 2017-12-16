@@ -1,6 +1,0 @@
----
-name: "consul"
-version: "0.9.2"
-download_addr: "http://cjb-packages.oss-cn-hangzhou.aliyuncs.com/{{ name }}/{{ name }}_{{ version }}_linux_amd64.zip"
-temp_path: "/tmp"
-install_path: "/usr/local/webserver/{{ name }}_{{ version }}"

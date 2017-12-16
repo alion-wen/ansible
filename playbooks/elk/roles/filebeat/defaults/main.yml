@@ -1,0 +1,16 @@
+---
+#filebeat
+prefix: "https://artifacts.elastic.co/downloads/beats/filebeat/"
+name: "filebeat-6.0.0-x86_64.rpm"
+version: "6.0.0"
+package_url: "{{ url_prefix }}/{{ name }}"
+logdir: "/data0/logs"
+type: "nginx"
+redis:
+ host: '127.0.0.1'
+ port: '6379'
+ password: 'password'
+kafka:
+ host: '127.0.0.1' 
+ port: '9092'
+

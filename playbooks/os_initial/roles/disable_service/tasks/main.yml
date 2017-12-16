@@ -2,7 +2,6 @@
  - name: Close Selinux
    selinux: 
     state: disabled
-   when: inventory_hostname not in groups["vultr"]
 
  - name: Disable Firewall On Centos 6
    service: 

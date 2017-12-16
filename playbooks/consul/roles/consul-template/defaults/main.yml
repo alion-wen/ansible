@@ -1,0 +1,6 @@
+---
+name: "consul-template"
+version: "0.19.4"
+download_addr: "https://releases.hashicorp.com//{{ name }}/{{ name }}_{{ version }}_linux_amd64.zip"
+temp_path: "/tmp"
+install_path: "/usr/bin"

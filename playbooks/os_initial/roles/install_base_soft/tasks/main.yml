@@ -94,16 +94,15 @@
     - python34-pip
     - firewalld
 
- - block: 
-    - debug:
-       msg: "Change PYPI Source"
-    - file:
-       path: "~/.pip"
-       state: directory
-    - copy:
-       src: "pip.conf"
-       dest: "~/.pip/pip.conf"
-   when: inventory_hostname not in groups["vultr"]
+# - block: 
+#    - debug:
+#       msg: "Change PYPI Source"
+#    - file:
+#       path: "~/.pip"
+#       state: directory
+#    - copy:
+#       src: "pip.conf"
+#       dest: "~/.pip/pip.conf"
 
  - name: Update Pip
    pip:

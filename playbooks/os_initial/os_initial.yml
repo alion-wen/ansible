@@ -6,7 +6,6 @@
 
  - hosts:
     - aliyun
-    - vultr
    roles:
     - role: set_repo
     - role: install_base_soft

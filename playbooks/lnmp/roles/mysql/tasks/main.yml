@@ -26,6 +26,8 @@
    yum:
     name: "{{ mysql_package_url }}"
     state: present
+   tags:
+    - installing
 
  - name: Add Mysql Libs Configuration
    template:
@@ -63,6 +65,8 @@
       with_items:
        - {name: my.cnf, mode: 600}
        - {name: mysqld, mode: 700}
+   tags:
+    - instance
 
  - name: Start Daemon When System Boot
    blockinfile: 
@@ -70,4 +74,7 @@
     block: "{{ mysql_datadir }}/{{ mysql_port }}/mysqld start"
     dest: /etc/rc.d/rc.local
 
+ - name: Include Percona_tools Roles
+   include_role:
+    name: percona_tools 
 ...

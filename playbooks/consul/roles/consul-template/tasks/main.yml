@@ -1,12 +1,12 @@
 ---
- - name: Download Consul Binary Package
+ - name: Download Consul-template Binary Package
    uri:
     method: "GET" 
     url: "{{ download_addr }}"
     dest: "{{ temp_path }}/{{ name }}.zip"
     creates: "{{temp_path}}/{{ name }}.zip"
 
- - name: Installing Consul
+ - name: Installing Consul-template
    unarchive:
     src: "{{ temp_path }}/{{ name }}.zip"
     dest: "{{ install_path }}"

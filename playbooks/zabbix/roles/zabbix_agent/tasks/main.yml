@@ -6,8 +6,11 @@
 
  - name: install dependent packages
    yum: 
-    name: unixODBC 
+    name: "{{ item }}"
     state: present
+   with_items:
+    - "unixODBC"
+    - "git"
 
  - name: Install Zabbix-agentd On CentOS
    yum: 
