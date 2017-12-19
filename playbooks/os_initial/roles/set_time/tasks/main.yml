@@ -6,12 +6,6 @@
    notify:
     - Restart Crond
 
- - name: Close Ntpd Service
-   service:
-    name: ntpd
-    state: stopped
-    enabled: no
-
  - name: Sync Datetime Crontab
    cron: 
     name: "Sync Datetime" 

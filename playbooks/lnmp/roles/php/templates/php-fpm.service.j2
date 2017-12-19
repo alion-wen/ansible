@@ -1,0 +1,17 @@
+[Unit]
+Description=The php-fpm
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/run/php-fpm.pid
+ExecStartPre=/usr/bin/rm -f /run/php-fpm.pid
+ExecStartPre={{ php_install_dir }}/sbin/php-fpm -t
+ExecStart={{ php_install_dir }}/sbin/php-fpm
+ExecReload=/bin/kill -s USR2 $MAINPID
+KillSignal=SIGQUIT
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

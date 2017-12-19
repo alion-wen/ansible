@@ -17,9 +17,13 @@
     enabled: no
    when: ansible_distribution_major_version == "7"
 
- - name: Disable Postfix
+ - name: Disable Service
    service:
-    name: postfix
+    name: "{{ item }}"
     state: stopped
     enabled: no
+   with_items:
+    - "chronyd"
+    - "ntpd"
+    - "postfix"
 

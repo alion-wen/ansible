@@ -1,0 +1,6 @@
+---
+ - name: Enable PHP-Fpm
+   service: 
+    name: php-fpm
+    enabled: yes
+...

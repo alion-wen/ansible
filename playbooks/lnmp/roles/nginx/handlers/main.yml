@@ -1,0 +1,6 @@
+---
+ - name: Enable Nginx
+   service: 
+    name: nginx
+    enabled: yes
+...

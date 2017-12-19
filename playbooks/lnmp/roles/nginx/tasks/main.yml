@@ -8,7 +8,14 @@
    yum:
     name: "{{ nginx_package_url }}"
     state: present
+   when: install_naxsi == false
  
+ - name: Install Nginx Waf
+   yum:
+    name: "{{ nginx_naxsi_package_url }}"
+    state: present
+   when: install_naxsi == true
+
  - block:
     - debug:
        msg: Get Nginx Conf
@@ -30,10 +37,15 @@
 #    state: link
 
  - name: Start Daemon When System Boot
-   blockinfile:
-    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR NGINX"
-    block: "{{ nginx_install_dir }}/sbin/nginx"
-    dest: /etc/rc.d/rc.local
+#   blockinfile:
+#    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR NGINX"
+#    block: "{{ nginx_install_dir }}/sbin/nginx"
+#    dest: /etc/rc.d/rc.local
+   template:
+    src: nginx.service.j2
+    dest: /etc/systemd/system/nginx.service
+   notify:
+    - Enable Nginx
 
  - name: Create Logs Dir
    file:
@@ -45,7 +57,7 @@
 
  - name: Set Regular Clean Nginx Logs
    template: 
-    src: nginx.logrotate
+    src: nginx.logrotate.j2
     dest: /etc/logrotate.d/nginx
 
  - name: Set Environment PATH 
